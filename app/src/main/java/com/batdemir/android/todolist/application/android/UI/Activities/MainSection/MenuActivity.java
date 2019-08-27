@@ -9,17 +9,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.batdemir.android.todolist.application.android.Entity.UIModels.EventsItemModel;
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
 import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.TaskDefinationActivity;
 import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.TodoListDefinationActivity;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterFragmentPager;
+import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewEvents;
 import com.batdemir.android.todolist.application.android.UI.Fragments.EventsFragment;
 import com.batdemir.android.todolist.application.android.UI.Fragments.TodoListFragment;
 import com.batdemir.android.todolist.application.android.databinding.ActivityMenuBinding;
 
-public class MenuActivity extends BaseActivity {
+public class MenuActivity extends BaseActivity implements
+        AdapterRecyclerViewEvents.EventsItemListener {
 
     private Context context;
     private ActivityMenuBinding binding;
@@ -61,5 +64,10 @@ public class MenuActivity extends BaseActivity {
         adapterFragmentPager.notifyDataSetChanged();
         viewPager.setAdapter(adapterFragmentPager);
         viewPager.setOffscreenPageLimit(2);
+    }
+
+    @Override
+    public void onItemClick(EventsItemModel eventsItemModel) {
+        new Tool(context).move(eventsItemModel.getTo(),true,true);
     }
 }

@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseActions {
+public abstract class BaseActivity extends AppCompatActivity implements
+        BaseActions,
+        ToolAlertDialog.clickOkey,
+        ToolAlertDialog.clickCancel{
 
     private boolean showExitDialog;
 
@@ -50,5 +53,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.orange2,null)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeButton);
+    }
+
+    @Override
+    public void dialogOkey() {
+        if(showExitDialog){
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void dialogCancel() {
+        //TODO
     }
 }
