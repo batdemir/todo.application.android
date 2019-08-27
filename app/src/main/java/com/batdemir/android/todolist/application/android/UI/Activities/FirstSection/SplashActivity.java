@@ -1,4 +1,4 @@
-package com.batdemir.android.todolist.application.android.UI.Activities;
+package com.batdemir.android.todolist.application.android.UI.Activities.FirstSection;
 
 import android.Manifest;
 import android.content.Context;
@@ -127,6 +127,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void move(){
         set_BASEURL();
-        new Tool(context).move(SignInActivity.class,false);
+        new Tool(context).move(SignInActivity.class,false,false);
     }
 }

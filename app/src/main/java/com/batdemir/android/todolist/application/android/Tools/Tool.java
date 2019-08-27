@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.batdemir.android.todolist.application.android.R;
 
@@ -19,17 +20,19 @@ public class Tool {
         this.context = context;
     }
 
-    public void move(Class<?> to, boolean isLeft){
+    public void move(Class<?> to, boolean isLeft, boolean isHistory){
         try {
             Activity activity = (Activity) context;
             Intent intent = new Intent(context,to);
             context.startActivity(intent);
             if(isLeft){
                 activity.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_left);
-                activity.finish();
+                if(!isHistory)
+                    activity.finish();
             }else {
                 activity.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
-                activity.finish();
+                if(!isHistory)
+                    activity.finish();
             }
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
@@ -38,7 +41,16 @@ public class Tool {
 
     public void anim(LinearLayout linearProps){
         try {
-            Animation animation  = AnimationUtils.loadAnimation(context,R.anim.slide_down);
+            Animation animation = AnimationUtils.loadAnimation(context,R.anim.slide_down);
+            linearProps.startAnimation(animation);
+        }catch (Exception e){
+            Log.e(TAG,e.getMessage());
+        }
+    }
+
+    public void animDialog(LinearLayout linearProps){
+        try {
+            Animation animation = AnimationUtils.loadAnimation(context,R.anim.zoom_in);
             linearProps.startAnimation(animation);
         }catch (Exception e){
             Log.e(TAG,e.getMessage());

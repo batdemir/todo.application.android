@@ -2,7 +2,7 @@
 <set
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <translate
-        android:duration="@integer/duration_move"
+        android:duration="@integer/duration_fast"
         android:fromXDelta="0%"
         android:toXDelta="100%" />
 </set>

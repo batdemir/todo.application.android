@@ -1,4 +1,4 @@
-package com.batdemir.android.todolist.application.android.UI.Activities;
+package com.batdemir.android.todolist.application.android.UI.Activities.FirstSection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -6,24 +6,25 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.ButtonTools.ButtonRules;
 import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTouchEvent;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.CharCountValidWatcher;
+import com.batdemir.android.todolist.application.android.Tools.EditTextTools.ConfirmPasswordValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.EditTextRules;
+import com.batdemir.android.todolist.application.android.Tools.EditTextTools.EmailValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActions;
-import com.batdemir.android.todolist.application.android.databinding.ActivitySignInBinding;
+import com.batdemir.android.todolist.application.android.databinding.ActivitySignUpBinding;
 
-public class SignInActivity extends AppCompatActivity implements
+public class SignUpActivity extends AppCompatActivity implements
         BaseActions,
         EditTextRules,
         ButtonRules {
 
     private Context context;
-    private ActivitySignInBinding binding;
+    private ActivitySignUpBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,14 @@ public class SignInActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        //TODO
+        super.onBackPressed();
+        new Tool(context).move(SignInActivity.class,true,false);
     }
 
     @Override
     public void getObjectReferences() {
         context = this;
-        binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_sign_in);
+        binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_sign_up);
         new Tool(context).anim(binding.linearProps);
     }
 
@@ -53,20 +55,23 @@ public class SignInActivity extends AppCompatActivity implements
 
     @Override
     public void setListeners() {
-        binding.btnSignUp.setOnClickListener(v -> new Tool(context).move(SignUpActivity.class,false));
+        binding.txtAlreadyHaveAnAccount.setOnClickListener(v -> new Tool(context).move(SignInActivity.class,true,false));
     }
 
     //----functions----//
 
     @Override
     public void defineEditTexts() {
+        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextFirstName));
+        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextSurName));
         binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserName));
         binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserPassword));
+        binding.editTextConfirmUserPassword.addTextChangedListener(new ConfirmPasswordValidWatcher(binding.editTextUserPassword,binding.editTextConfirmUserPassword));
+        binding.editTextEmail.addTextChangedListener(new EmailValidWatcher(binding.editTextEmail));
     }
 
     @Override
     public void defineButtons() {
-        binding.btnLogin.setOnTouchListener(new OnTouchEvent(binding.btnLogin));
         binding.btnSignUp.setOnTouchListener(new OnTouchEvent(binding.btnSignUp));
     }
 }

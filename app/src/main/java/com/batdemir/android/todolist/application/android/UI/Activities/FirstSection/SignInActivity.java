@@ -1,4 +1,4 @@
-package com.batdemir.android.todolist.application.android.UI.Activities;
+package com.batdemir.android.todolist.application.android.UI.Activities.FirstSection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -7,25 +7,28 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.batdemir.android.todolist.application.android.R;
+import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.ButtonTools.ButtonRules;
 import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTouchEvent;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.CharCountValidWatcher;
-import com.batdemir.android.todolist.application.android.Tools.EditTextTools.ConfirmPasswordValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.EditTextRules;
-import com.batdemir.android.todolist.application.android.Tools.EditTextTools.EmailValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActions;
-import com.batdemir.android.todolist.application.android.databinding.ActivitySignUpBinding;
+import com.batdemir.android.todolist.application.android.UI.Activities.MainSection.MenuActivity;
+import com.batdemir.android.todolist.application.android.databinding.ActivitySignInBinding;
 
-public class SignUpActivity extends AppCompatActivity implements
+public class SignInActivity extends AppCompatActivity implements
         BaseActions,
         EditTextRules,
-        ButtonRules {
+        ButtonRules,
+        ToolAlertDialog.clickOkey,
+        ToolAlertDialog.clickCancel {
 
     private Context context;
-    private ActivitySignUpBinding binding;
+    private ActivitySignInBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +40,15 @@ public class SignUpActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        new Tool(context).move(SignInActivity.class,true);
+        ToolAlertDialog
+                .newInstance(getString(R.string.exit_application),true)
+                .show(getSupportFragmentManager(),SignInActivity.class.getSimpleName());
     }
 
     @Override
     public void getObjectReferences() {
         context = this;
-        binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_sign_up);
+        binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_sign_in);
         new Tool(context).anim(binding.linearProps);
     }
 
@@ -56,23 +60,37 @@ public class SignUpActivity extends AppCompatActivity implements
 
     @Override
     public void setListeners() {
-        binding.txtAlreadyHaveAnAccount.setOnClickListener(v -> new Tool(context).move(SignInActivity.class,true));
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToolAlertDialog.newInstance("Test",false).show(getSupportFragmentManager(),"test");
+            }
+        });
+        binding.btnSignUp.setOnClickListener(v -> new Tool(context).move(SignUpActivity.class,false,false));
     }
 
     //----functions----//
 
     @Override
     public void defineEditTexts() {
-        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextFirstName));
-        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextSurName));
         binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserName));
         binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserPassword));
-        binding.editTextConfirmUserPassword.addTextChangedListener(new ConfirmPasswordValidWatcher(binding.editTextUserPassword,binding.editTextConfirmUserPassword));
-        binding.editTextEmail.addTextChangedListener(new EmailValidWatcher(binding.editTextEmail));
     }
 
     @Override
     public void defineButtons() {
+        binding.btnLogin.setOnTouchListener(new OnTouchEvent(binding.btnLogin));
         binding.btnSignUp.setOnTouchListener(new OnTouchEvent(binding.btnSignUp));
+    }
+
+    @Override
+    public void dialogOkey() {
+        Toast.makeText(context,"Okey",Toast.LENGTH_SHORT).show();
+        new Tool(context).move(MenuActivity.class,true,false);
+    }
+
+    @Override
+    public void dialogCancel() {
+        Toast.makeText(context,"Cancel",Toast.LENGTH_SHORT).show();
     }
 }

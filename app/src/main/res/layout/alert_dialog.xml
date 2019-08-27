@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:id="@+id/rootAlertDialog"
+        android:layout_height="wrap_content"
+        style="@style/style_other_root">
+
+        <LinearLayout
+            android:id="@+id/linearProps"
+            style="@style/style_other_props">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linearInner"
+                    style="@style/style_other_inner">
+
+                    <ImageView
+                        android:src="@android:drawable/ic_menu_info_details"
+                        android:padding="16dp"
+                        style="@style/style_other_image_view"/>
+
+                    <TextView
+                        android:id="@+id/txtEditMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:padding="8dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/linearButtons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnCancel"
+                            android:text="@string/cancel"
+                            android:layout_weight="1"
+                            style="@style/style_other_button"/>
+
+                        <Button
+                            android:id="@+id/btnOkey"
+                            android:text="@string/okey"
+                            android:layout_weight="1"
+                            style="@style/style_other_button"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

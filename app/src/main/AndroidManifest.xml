@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.batdemir.android.todolist.application.android">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,22 +11,37 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".UI.Activities.SignInActivity"
+            android:name=".UI.Activities.DetailSection.TodoListDefinationActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/theme_noActionBar"/>
+            android:theme="@style/theme_actionBar" />
         <activity
-            android:name=".UI.Activities.SignUpActivity"
+            android:name=".UI.Activities.DetailSection.TaskDefinationActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/theme_noActionBar"/>
+            android:theme="@style/theme_actionBar"/>
         <activity
-            android:name=".UI.Activities.SplashActivity"
+            android:name=".UI.Activities.MainSection.MenuActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/theme_actionBar"/>
+        <activity
+            android:name=".UI.Activities.FirstSection.SignInActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/theme_noActionBar" />
+        <activity
+            android:name=".UI.Activities.FirstSection.SignUpActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/theme_noActionBar" />
+        <activity
+            android:name=".UI.Activities.FirstSection.SplashActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/theme_splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

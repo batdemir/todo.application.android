@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
-        tools:context=".UI.Activities.SignUpActivity"
+        tools:context=".UI.Activities.FirstSection.SignUpActivity"
         android:id="@+id/rootSignUp"
         style="@style/style_sign_root">
 
@@ -56,7 +56,6 @@
                     <Button
                         android:id="@+id/btnSignUp"
                         android:text="@string/sign_up"
-                        android:background="@color/black25"
                         style="@style/style_sign_button"/>
 
                 </LinearLayout>
