@@ -127,6 +127,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void move(){
         set_BASEURL();
-        Tool.move(context,SignInActivity.class,false);
+        new Tool(context).move(SignInActivity.class,false);
     }
 }

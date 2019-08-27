@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#FFBF7F</color>
 
     <color name="transparent">#00000000</color>
 
@@ -16,10 +16,30 @@
     <color name="white50">#50FFFFFF</color>
     <color name="white25">#25FFFFFF</color>
 
+    <color name="white2">#F2F2F2</color>
+    <color name="white275">#75F2F2F2</color>
+    <color name="white250">#50F2F2F2</color>
+    <color name="white225">#25F2F2F2</color>
+
+    <color name="white3">#E5E5E5</color>
+    <color name="white375">#75E5E5E5</color>
+    <color name="white350">#50E5E5E5</color>
+    <color name="white325">#25E5E5E5</color>
+
     <color name="red">#FF0000</color>
     <color name="red75">#75FF0000</color>
     <color name="red50">#50FF0000</color>
     <color name="red25">#25FF0000</color>
+
+    <color name="red2">#FF3333</color>
+    <color name="red275">#75FF3333</color>
+    <color name="red250">#50FF3333</color>
+    <color name="red225">#25FF3333</color>
+
+    <color name="red3">#FF4D4D</color>
+    <color name="red375">#75FF4D4D</color>
+    <color name="red350">#50FF4D4D</color>
+    <color name="red325">#25FF4D4D</color>
 
     <color name="blue">#0000FF</color>
     <color name="blue75">#750000FF</color>
@@ -30,4 +50,24 @@
     <color name="yellow75">#75FFFF00</color>
     <color name="yellow50">#50FFFF00</color>
     <color name="yellow25">#25FFFF00</color>
+
+    <color name="green">#00FF00</color>
+    <color name="green75">#7500FF00</color>
+    <color name="green50">#5000FF00</color>
+    <color name="green25">#2500FF00</color>
+
+    <color name="orange">#FFBF7F</color>
+    <color name="orange75">#75FFBF7F</color>
+    <color name="orange50">#50FFBF7F</color>
+    <color name="orange25">#25FFBF7F</color>
+
+    <color name="orange2">#FFD8B2</color>
+    <color name="orange275">#75FFD8B2</color>
+    <color name="orange250">#50FFD8B2</color>
+    <color name="orange225">#25FFD8B2</color>
+
+    <color name="orange3">#FFF2E5</color>
+    <color name="orange375">#75FFF2E5</color>
+    <color name="orange350">#50FFF2E5</color>
+    <color name="orange325">#25FFF2E5</color>
 </resources>
