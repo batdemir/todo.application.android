@@ -21,10 +21,7 @@
 
                     <LinearLayout
                         android:id="@+id/linearInner"
-                        style="@style/style_other_inner"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        style="@style/style_other_inner">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/textInputName"
@@ -207,6 +204,7 @@
             android:id="@+id/recyclerViewTasks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="8dp"
             tools:listitem="@layout/recycler_view_item_tasks" />
 
     </LinearLayout>

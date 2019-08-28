@@ -20,4 +20,7 @@
     <string name="priorty">Priorty</string>
     <string name="deadline_calender">Deadline Calender</string>
     <string name="deadline_clock">Deadline Clock</string>
+    <string name="todo_list_name">Todo List Name</string>
+    <string name="selected_tasks">Selected Tasks</string>
+    <string name="selectable_tasks">Selectable Tasks</string>
 </resources>

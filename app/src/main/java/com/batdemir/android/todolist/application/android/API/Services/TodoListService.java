@@ -9,15 +9,15 @@ import android.os.AsyncTask;
 import androidx.fragment.app.FragmentActivity;
 
 import com.batdemir.android.todolist.application.android.API.ApiClient;
-import com.batdemir.android.todolist.application.android.API.IServices.ITaskService;
-import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TaskModel;
+import com.batdemir.android.todolist.application.android.API.IServices.ITodoListsService;
+import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TodoListModel;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.ToolConnection;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class TaskService<T> implements
+public class TodoListService<T> implements
         ToolAlertDialog.AlertClickListener {
 
     private Context context;
@@ -34,7 +34,7 @@ public class TaskService<T> implements
         }
     }
 
-    public TaskService(Context context) {
+    public TodoListService(Context context) {
         this.context = context;
         connectionAvailable = ToolConnection.isConnected(context);
         if (!connectionAvailable)
@@ -46,36 +46,36 @@ public class TaskService<T> implements
     public void Get() {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Get).execute(iTaskService.Get());
+        ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
+        new ConnectService(context,OperationType.Get).execute(iTodoListsService.Get());
     }
 
     public void GetByName(String name) {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.GetByName).execute(iTaskService.GetByName(name));
+        ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
+        new ConnectService(context,OperationType.GetByName).execute(iTodoListsService.GetByName(name));
     }
 
-    public void Insert(TaskModel taskModel) {
+    public void Insert(TodoListModel todoListModel) {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Insert).execute(iTaskService.Insert(taskModel));
+        ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
+        new ConnectService(context,OperationType.Insert).execute(iTodoListsService.Insert(todoListModel));
     }
 
-    public void Update(String name, TaskModel taskModel) {
+    public void Update(String name, TodoListModel todoListModel) {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Update).execute(iTaskService.Update(name, taskModel));
+        ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
+        new ConnectService(context,OperationType.Update).execute(iTodoListsService.Update(name, todoListModel));
     }
 
     public void Delete(String name) {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Delete).execute(iTaskService.Delete(name));
+        ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
+        new ConnectService(context,OperationType.Delete).execute(iTodoListsService.Delete(name));
     }
 
     @Override
@@ -126,26 +126,26 @@ public class TaskService<T> implements
                 progressDialog.dismiss();
             }
             Activity activity = (Activity) context;
-            TaskServiceListener taskServiceListener = (TaskServiceListener) activity;
+            TodoListServiceListener todoListServiceListener = (TodoListServiceListener) activity;
             try {
                 if (response.isSuccessful()) {
-                    taskServiceListener.onSuccess(operationType,response);
+                    todoListServiceListener.onSuccess(operationType,response);
                 } else {
                     ToolAlertDialog
                             .newInstance(response.errorBody().string(), false, false)
                             .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
-                    taskServiceListener.onFailure();
+                    todoListServiceListener.onFailure();
                 }
             } catch (Exception e) {
                 ToolAlertDialog
                         .newInstance("Could not contact the service.\nPlease Try Again.", false, false)
                         .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
-                taskServiceListener.onFailure();
+                todoListServiceListener.onFailure();
             }
         }
     }
 
-    public interface TaskServiceListener<T> {
+    public interface TodoListServiceListener<T> {
         void onSuccess(OperationType operationType, Response<T> response);
         void onFailure();
     }

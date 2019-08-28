@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <LinearLayout
         tools:context=".UI.Activities.DetailSection.TodoListDefinationActivity"
         android:id="@+id/rootTodoListDefination"
+        android:orientation="vertical"
         style="@style/style_other_root">
 
         <LinearLayout
@@ -20,8 +21,29 @@
 
                 <LinearLayout
                     android:id="@+id/linearInner"
+                    android:orientation="horizontal"
                     style="@style/style_other_inner">
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/todo_list_name">
+
+                        <EditText
+                            android:id="@+id/editTextName"
+                            android:inputType="text"
+                            style="@style/style_other_edittext"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/floatingActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_add_mini"
+                        android:backgroundTint="@color/secondaryColor"/>
 
                 </LinearLayout>
 
@@ -29,6 +51,35 @@
 
         </LinearLayout>
 
-    </ScrollView>
+        <LinearLayout
+            android:id="@+id/linearSelectableTasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/txtSelectableTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/selectable_tasks"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_bold"
+                android:padding="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSelectableTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/recycler_view_item_select_tasks" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </layout>

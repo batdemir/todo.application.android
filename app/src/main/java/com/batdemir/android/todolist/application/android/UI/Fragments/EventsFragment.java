@@ -15,6 +15,8 @@ import com.batdemir.android.todolist.application.android.Entity.UIModels.EventsI
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActions;
+import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.ExitActivity;
+import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.SettingsActivity;
 import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.TaskDefinationActivity;
 import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.TodoListDefinationActivity;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewEvents;
@@ -62,7 +64,9 @@ public class EventsFragment extends Fragment implements BaseActions{
     private ArrayList<EventsItemModel> getModels(){
         ArrayList<EventsItemModel> models = new ArrayList<>();
         models.add(new EventsItemModel(UUID.randomUUID().toString(),"Task Defination", TaskDefinationActivity.class,getContext().getDrawable(R.drawable.ic_task_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Todo List Defination", TodoListDefinationActivity.class,getContext().getDrawable(R.drawable.ic_logo_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Todo List Defination", TodoListDefinationActivity.class,getContext().getDrawable(R.drawable.ic_todo_list_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Settings", SettingsActivity.class,getContext().getDrawable(R.drawable.ic_settings_gears_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Exit", ExitActivity.class,getContext().getDrawable(R.drawable.ic_exit_mini)));
         return models;
     }
 }

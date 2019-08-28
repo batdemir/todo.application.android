@@ -1,7 +1,6 @@
 package com.batdemir.android.todolist.application.android.UI.Activities.DetailSection;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -9,10 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.batdemir.android.todolist.application.android.API.Services.TaskService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TaskModel;
@@ -24,7 +21,6 @@ import com.batdemir.android.todolist.application.android.Tools.ToolTimeExpressio
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewTasks;
 import com.batdemir.android.todolist.application.android.databinding.ActivityTaskDefinationBinding;
-import com.batdemir.android.todolist.application.android.databinding.RecyclerViewItemTasksBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -35,7 +31,7 @@ import retrofit2.Response;
 
 public class TaskDefinationActivity extends BaseActivity implements
         AdapterRecyclerViewTasks.TasksItemListener,
-        TaskService.UserServiceListener,
+        TaskService.TaskServiceListener,
         ToolAlertDialog.AlertClickListener {
 
     private Context context;
