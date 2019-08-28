@@ -15,4 +15,9 @@
     <string name="cancel">Cancel</string>
     <string name="okey">Okey</string>
     <string name="exit_application">Are you sure you want to exit the application?</string>
+    <string name="task_name">Task Name</string>
+    <string name="notes">Notes</string>
+    <string name="priorty">Priorty</string>
+    <string name="deadline_calender">Deadline Calender</string>
+    <string name="deadline_clock">Deadline Clock</string>
 </resources>

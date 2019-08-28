@@ -46,8 +46,8 @@ public class EventsFragment extends Fragment implements BaseActions{
     @Override
     public void loadData() {
         AdapterRecyclerViewEvents adapterRecyclerViewEvents = new AdapterRecyclerViewEvents(getContext(),getModels());
-        binding.recyclerViewEvents.setAdapter(adapterRecyclerViewEvents);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false);
+        binding.recyclerViewEvents.setAdapter(adapterRecyclerViewEvents);
         binding.recyclerViewEvents.setLayoutManager(gridLayoutManager);
         binding.recyclerViewEvents.setItemViewCacheSize(getModels().size());
     }

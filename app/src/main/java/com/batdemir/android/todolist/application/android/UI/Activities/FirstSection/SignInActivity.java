@@ -76,9 +76,9 @@ public class SignInActivity extends AppCompatActivity implements
     private boolean controlInputs(){
         String message = "";
         message += binding.editTextUserName.getError()!=null || binding.editTextUserName.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.editTextUserName.getHint() + "!\n":"";
+                ?"Please Enter Correctly " + binding.textInputUserName.getHint() + "!\n":"";
         message += binding.editTextUserPassword.getError()!=null || binding.editTextUserPassword.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.editTextUserPassword.getHint() + "!\n":"";
+                ?"Please Enter Correctly " + binding.textInputUserPassword.getHint() + "!\n":"";
 
         if(message.isEmpty())
             return true;
@@ -111,8 +111,20 @@ public class SignInActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSuccess(Response response) {
-        new Tool(context).move(MenuActivity.class,true,false);
+    public void onSuccess(UserService.OperationType operationType, Response response) {
+        switch (operationType){
+            case Get:
+                new Tool(context).move(MenuActivity.class,true,false);
+                break;
+            case GetByName:
+                break;
+            case Insert:
+                break;
+            case Update:
+                break;
+            case Delete:
+                break;
+        }
     }
 
     @Override

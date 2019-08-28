@@ -9,33 +9,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
 public class OnTouchEvent implements View.OnTouchListener {
 
     private String TAG = OnTouchEvent.class.getSimpleName();
     private final View view;
-    private ImageView imageView;
-    private ImageButton imageButton;
-    private Button button;
-    private TextView textView;
 
-    public OnTouchEvent(ImageView imageView) {
-        this.imageView = imageView;
-        view = imageView;
-    }
-
-    public OnTouchEvent(ImageButton imageButton) {
-        this.imageButton = imageButton;
-        view = imageButton;
-    }
-
-    public OnTouchEvent(Button button) {
-        this.button = button;
-        view = button;
-    }
-
-    public OnTouchEvent(TextView textView) {
-        this.textView = textView;
-        view = textView;
+    public OnTouchEvent(View view) {
+        this.view = view;
     }
 
     @Override
@@ -43,14 +25,14 @@ public class OnTouchEvent implements View.OnTouchListener {
         try {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
-                    button.getBackground().setColorFilter(0x88FFFFFF, PorterDuff.Mode.SRC_ATOP);
-                    button.invalidate();
+                    view.getBackground().setColorFilter(0x88FFFFFF, PorterDuff.Mode.SRC_ATOP);
+                    view.invalidate();
                     break;
                 }
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL: {
-                    button.getBackground().clearColorFilter();
-                    button.invalidate();
+                    view.getBackground().clearColorFilter();
+                    view.invalidate();
                     break;
                 }
             }

@@ -21,7 +21,7 @@ public interface IUserService {
     Call<ArrayList<UserModel>> Get();
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("ConstantTableUsers")
+    @GET("ConstantTableUsers/{id}")
     Call<UserModel> GetByName(
             @Path("id") String name
     );
@@ -33,14 +33,14 @@ public interface IUserService {
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @PUT("ConstantTableUsers")
+    @PUT("ConstantTableUsers/{id}")
     Call<UserModel> Update(
             @Path("id") String name,
             @Body UserModel userModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("ConstantTableUsers")
+    @DELETE("ConstantTableUsers/{id}")
     Call<UserModel> Delete(
             @Path("id") String name
     );

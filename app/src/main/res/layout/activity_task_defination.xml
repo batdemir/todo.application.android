@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <LinearLayout
         tools:context=".UI.Activities.DetailSection.TaskDefinationActivity"
         android:id="@+id/rootTaskDefination"
+        android:orientation="vertical"
         style="@style/style_other_root">
 
         <LinearLayout
@@ -18,17 +19,196 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/linearInner"
-                    style="@style/style_other_inner">
+                    <LinearLayout
+                        android:id="@+id/linearInner"
+                        style="@style/style_other_inner"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/task_name">
 
-                </LinearLayout>
+                            <EditText
+                                android:id="@+id/editTextName"
+                                android:inputType="text"
+                                style="@style/style_other_edittext"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputNotes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/notes">
+
+                            <EditText
+                                android:id="@+id/editTextNotes"
+                                android:inputType="text"
+                                android:imeOptions="actionDone"
+                                style="@style/style_other_edittext"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/contraintDeadCalender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/imgDeadLineCalender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_alarm_mini"
+                                android:padding="8dp"
+                                android:contentDescription="@string/todo"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"/>
+
+                            <LinearLayout
+                                android:id="@+id/linearDeadLineCalaneder"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toTopOf="@+id/imgDeadLineCalender"
+                                app:layout_constraintBottom_toBottomOf="@id/imgDeadLineCalender"
+                                app:layout_constraintStart_toEndOf="@id/imgDeadLineCalender">
+
+                                <TextView
+                                    android:id="@+id/txtDeadLineCalender"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/deadline_calender"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/roboto_bold"/>
+
+                                <TextView
+                                    android:id="@+id/txtEditDeadLineCalender"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:fontFamily="@font/roboto"/>
+
+                            </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/contraintDeadLineClock"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/imgDeadLineClock"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_alarm_clock_mini"
+                                android:padding="8dp"
+                                android:contentDescription="@string/todo"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"/>
+
+                            <LinearLayout
+                                android:id="@+id/linearDeadLineClock"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toTopOf="@+id/imgDeadLineClock"
+                                app:layout_constraintBottom_toBottomOf="@id/imgDeadLineClock"
+                                app:layout_constraintStart_toEndOf="@id/imgDeadLineClock">
+
+                                <TextView
+                                    android:id="@+id/txtDeadLineClock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/deadline_clock"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/roboto_bold"/>
+
+                                <TextView
+                                    android:id="@+id/txtEditDeadLineClock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:fontFamily="@font/roboto"/>
+
+                            </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/contraintPriorty"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/imgPriorty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_flag_mini"
+                                android:padding="8dp"
+                                android:contentDescription="@string/todo"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <LinearLayout
+                                android:id="@+id/linearPriorty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toTopOf="@+id/imgPriorty"
+                                app:layout_constraintBottom_toBottomOf="@id/imgPriorty"
+                                app:layout_constraintStart_toEndOf="@id/imgPriorty">
+
+                                <TextView
+                                    android:id="@+id/txtPriorty"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/priorty"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/roboto_bold"
+                                    app:layout_constraintStart_toEndOf="@+id/imgPriorty"
+                                    app:layout_constraintTop_toTopOf="@id/imgPriorty" />
+
+                                <TextView
+                                    android:id="@+id/txtEditPriort"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:fontFamily="@font/roboto"
+                                    app:layout_constraintBottom_toBottomOf="@id/imgPriorty"
+                                    app:layout_constraintStart_toEndOf="@+id/imgPriorty" />
+
+                            </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/floatingActionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:src="@drawable/ic_add_mini"
+                            android:backgroundTint="@color/secondaryColor"/>
+
+                    </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
-    </ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/recycler_view_item_tasks" />
+
+    </LinearLayout>
 
 </layout>

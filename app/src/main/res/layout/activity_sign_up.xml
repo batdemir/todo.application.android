@@ -29,48 +29,52 @@
                         style="@style/style_sign_image_view"/>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputFirstName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:hint="@string/first_name">
 
                         <EditText
                             android:id="@+id/editTextFirstName"
-                            android:hint="@string/first_name"
                             android:inputType="text"
                             style="@style/style_sign_edittext" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputSurName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:hint="@string/sur_name">
 
                         <EditText
                             android:id="@+id/editTextSurName"
-                            android:hint="@string/sur_name"
                             android:inputType="text"
                             style="@style/style_sign_edittext"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputUserName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:hint="@string/user_name">
 
                         <EditText
                             android:id="@+id/editTextUserName"
-                            android:hint="@string/user_name"
                             android:inputType="textVisiblePassword"
                             style="@style/style_sign_edittext"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputUserPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password">
 
                         <EditText
                             android:id="@+id/editTextUserPassword"
-                            android:hint="@string/password"
                             android:inputType="textPassword"
                             style="@style/style_sign_edittext"/>
 
@@ -78,24 +82,26 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputConfirmUserPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:hint="@string/confirm_password">
 
                         <EditText
                             android:id="@+id/editTextConfirmUserPassword"
-                            android:hint="@string/confirm_password"
                             android:inputType="textPassword"
                             style="@style/style_sign_edittext"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputEmail"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email">
 
                         <EditText
                             android:id="@+id/editTextEmail"
-                            android:hint="@string/email"
                             android:inputType="textEmailAddress"
                             style="@style/style_sign_edittext"/>
 

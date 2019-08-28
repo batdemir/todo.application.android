@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.batdemir.android.todolist.application.android.Entity.UIModels.EventsItemModel;
 import com.batdemir.android.todolist.application.android.R;
+import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTouchEvent;
 import com.batdemir.android.todolist.application.android.databinding.RecyclerViewItemEventsBinding;
 
 import java.util.ArrayList;

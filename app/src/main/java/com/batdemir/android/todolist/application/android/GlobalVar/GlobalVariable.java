@@ -7,6 +7,7 @@ public abstract class GlobalVariable {
         NORMAL_DATE_FORMAT("yyyy-MM-dd HH:mm:ss"),
         SMALL_DATE_FORMAT("yyyy-MM-dd"),
         SHOW_DATE_FORMAT("dd/MM/yyyy"),
+        SHOW_FULL_FORMAT("dd/MM/yyyy HH:mm"),
         DEFAULT_TIME_FORMAT("HH:mm:ss"),
         SMALL_TIME_FORMAT("HH:mm");
         String str;

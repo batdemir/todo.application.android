@@ -70,6 +70,7 @@ public class ToolTimeExpressions {
     }
 
     public void showDatePicker(@NonNull final View buttonOrTextView,
+                               @NonNull final TextView textView,
                                @NonNull final String titleText,
                                @NonNull final String positiveButtonText,
                                @NonNull final String negativeButtonText){
@@ -86,14 +87,7 @@ public class ToolTimeExpressions {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar selectedDate = Calendar.getInstance();
                         selectedDate.set(year,month,dayOfMonth);
-                        if(buttonOrTextView.getClass()== Button.class){
-                            Button button = (Button) buttonOrTextView;
-                            button.setText(setDateToString(selectedDate.getTime(),GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
-                        }
-                        if(buttonOrTextView.getClass()== TextView.class){
-                            TextView textView = (TextView) buttonOrTextView;
-                            textView.setText(setDateToString(selectedDate.getTime(),GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
-                        }
+                        textView.setText(setDateToString(selectedDate.getTime(),GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
                     }
                 },year,month,day);
 
@@ -106,6 +100,7 @@ public class ToolTimeExpressions {
     }
 
     public void showTimePicker(@NonNull final View buttonOrTextView,
+                               @NonNull final TextView textView,
                                @NonNull final String titleText,
                                @NonNull final String positiveButtonText,
                                @NonNull final String negativeButtonText){
@@ -113,7 +108,7 @@ public class ToolTimeExpressions {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
-                int hour = calendar.get(Calendar.HOUR);
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
                 int minute = calendar.get(Calendar.MINUTE);
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
@@ -121,14 +116,7 @@ public class ToolTimeExpressions {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Calendar selectedTime = Calendar.getInstance();
                         selectedTime.set(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH,hourOfDay,minute,Calendar.SECOND);
-                        if(buttonOrTextView.getClass()==Button.class){
-                            Button button = (Button) buttonOrTextView;
-                            button.setText(setDateToString(selectedTime.getTime(),GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
-                        }
-                        if(buttonOrTextView.getClass()== TextView.class){
-                            TextView textView = (TextView) buttonOrTextView;
-                            textView.setText(setDateToString(selectedTime.getTime(),GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
-                        }
+                        textView.setText(setDateToString(selectedTime.getTime(),GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
                     }
                 }, hour,minute,true);
 
