@@ -18,6 +18,7 @@
 
                 <LinearLayout
                     android:id="@+id/linearInner"
+                    android:minWidth="320dp"
                     style="@style/style_other_inner">
 
                     <ImageView
@@ -42,13 +43,11 @@
                         <Button
                             android:id="@+id/btnCancel"
                             android:text="@string/cancel"
-                            android:layout_weight="1"
                             style="@style/style_other_button"/>
 
                         <Button
                             android:id="@+id/btnOkey"
                             android:text="@string/okey"
-                            android:layout_weight="1"
                             style="@style/style_other_button"/>
 
                     </LinearLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,20 +16,25 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.batdemir.android.todolist.application.android.R;
+import com.batdemir.android.todolist.application.android.Tools.ButtonTools.ButtonRules;
+import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTouchEvent;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActions;
 import com.batdemir.android.todolist.application.android.databinding.AlertDialogBinding;
 
-public class ToolAlertDialog extends DialogFragment implements BaseActions {
+public class ToolAlertDialog extends DialogFragment implements BaseActions, ButtonRules {
 
     private AlertDialogBinding binding;
     private static final String key_message = "KEY_MESSAGE";
+    private static final String key_showCancelButton = "KEY_SHOWCANCELBUTTON";
     private String message;
+    private Boolean showCancelButton;
 
-    public static ToolAlertDialog newInstance(String message, boolean isCancelable){
+    public static ToolAlertDialog newInstance(String message, boolean isCancelable, boolean showCancelButton){
         ToolAlertDialog toolAlertDialog = new ToolAlertDialog();
         Bundle bundle = new Bundle();
         bundle.putString(key_message,message);
+        bundle.putBoolean(key_showCancelButton,showCancelButton);
         toolAlertDialog.setArguments(bundle);
         toolAlertDialog.setCancelable(isCancelable);
         return toolAlertDialog;
@@ -48,12 +54,14 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions {
     public void getObjectReferences() {
         assert getArguments() != null;
         message = getArguments().getString(key_message);
+        showCancelButton = getArguments().getBoolean(key_showCancelButton);
         new Tool(getContext()).animDialog(binding.linearProps);
     }
 
     @Override
     public void loadData() {
         binding.txtEditMessage.setText(message);
+        defineButtons();
     }
 
     @Override
@@ -61,9 +69,9 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions {
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickCancel clickCancel = (ToolAlertDialog.clickCancel) getActivity();
+                AlertClickListener clickCancel = (ToolAlertDialog.AlertClickListener) getActivity();
                 assert clickCancel != null;
-                clickCancel.dialogCancel();
+                clickCancel.alertCancel();
                 dismiss();
             }
         });
@@ -71,19 +79,26 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions {
         binding.btnOkey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickOkey clickOkey = (ToolAlertDialog.clickOkey) getActivity();
+                AlertClickListener clickOkey = (ToolAlertDialog.AlertClickListener) getActivity();
                 assert clickOkey != null;
-                clickOkey.dialogOkey();
+                clickOkey.alertOkey();
                 dismiss();
             }
         });
     }
 
-    public interface clickOkey{
-        void dialogOkey();
+    @Override
+    public void defineButtons() {
+        binding.btnOkey.setOnTouchListener(new OnTouchEvent(binding.btnOkey));
+        if (showCancelButton) {
+            binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
+        } else {
+            binding.btnCancel.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0));
+        }
     }
 
-    public interface clickCancel{
-        void dialogCancel();
+    public interface AlertClickListener{
+        void alertOkey();
+        void alertCancel();
     }
 }

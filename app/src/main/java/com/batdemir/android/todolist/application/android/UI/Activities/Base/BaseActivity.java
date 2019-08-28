@@ -10,8 +10,7 @@ import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.
 
 public abstract class BaseActivity extends AppCompatActivity implements
         BaseActions,
-        ToolAlertDialog.clickOkey,
-        ToolAlertDialog.clickCancel{
+        ToolAlertDialog.AlertClickListener{
 
     private boolean showExitDialog;
 
@@ -24,7 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void onBackPressed() {
         if (showExitDialog){
             ToolAlertDialog
-                    .newInstance(getString(R.string.exit_application),true)
+                    .newInstance(getString(R.string.exit_application),true,true)
                     .show(getSupportFragmentManager(),BaseActivity.class.getSimpleName());
         }else {
             finish();
@@ -51,12 +50,13 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void init_toolbar(boolean showHomeButton, String title){
         getSupportActionBar();
         getSupportActionBar().setTitle(title);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.orange2,null)));
+        getSupportActionBar().setElevation(16F);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.primaryColor,null)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeButton);
     }
 
     @Override
-    public void dialogOkey() {
+    public void alertOkey() {
         if(showExitDialog){
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(0);
@@ -64,7 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void dialogCancel() {
+    public void alertCancel() {
         //TODO
     }
 }

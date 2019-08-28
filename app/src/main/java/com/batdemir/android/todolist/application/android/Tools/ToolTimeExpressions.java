@@ -22,6 +22,9 @@ public class ToolTimeExpressions {
     private String TAG=ToolTimeExpressions.class.getSimpleName();
     private Context context;
 
+    public ToolTimeExpressions() {
+    }
+
     public ToolTimeExpressions(@NonNull Context context) {
         this.context = context;
     }

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#FFBF7F</color>
+    <color name="colorAccent">#d50000</color>
 
     <color name="transparent">#00000000</color>
 
@@ -70,4 +70,16 @@
     <color name="orange375">#75FFF2E5</color>
     <color name="orange350">#50FFF2E5</color>
     <color name="orange325">#25FFF2E5</color>
+
+
+    <color name="primaryColor">#212121</color>
+    <color name="primaryLightColor">#484848</color>
+    <color name="primaryDarkColor">#000000</color>
+    <color name="primaryTextColor">#ffffff</color>
+
+    <color name="secondaryColor">#d50000</color>
+    <color name="secondaryLightColor">#ff5131</color>
+    <color name="secondaryDarkColor">#9b0000</color>
+    <color name="secondaryTextColor">#ffffff</color>
+
 </resources>

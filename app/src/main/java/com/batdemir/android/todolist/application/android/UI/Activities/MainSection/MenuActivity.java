@@ -55,6 +55,8 @@ public class MenuActivity extends BaseActivity implements
     private void set_tabLayout(){
         setupViewPager(binding.viewPager);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
+        binding.tabLayout.setBackgroundColor(getColor(R.color.primaryLightColor));
+        binding.tabLayout.setTabTextColors(getColor(R.color.white),getColor(R.color.white));
     }
 
     private void setupViewPager(ViewPager viewPager){

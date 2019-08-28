@@ -28,34 +28,48 @@
                         android:src="@drawable/ic_logo_large"
                         style="@style/style_sign_image_view"/>
 
-                    <EditText
-                        android:id="@+id/editTextUserName"
-                        android:hint="@string/user_name"
-                        android:inputType="textVisiblePassword"
-                        style="@style/style_sign_edittext" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/editTextUserPassword"
-                        android:hint="@string/password"
-                        android:inputType="textPassword"
-                        style="@style/style_sign_edittext"/>
+                        <EditText
+                            android:id="@+id/editTextUserName"
+                            android:hint="@string/user_name"
+                            android:inputType="textVisiblePassword"
+                            style="@style/style_sign_edittext" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/editTextUserPassword"
+                            android:hint="@string/password"
+                            android:inputType="textPassword"
+                            style="@style/style_sign_edittext"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <CheckBox
                         android:id="@+id/checkBoxRememberMe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/remember_me"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto"/>
 
                     <Button
                         android:id="@+id/btnLogin"
                         android:text="@string/login"
-                        android:background="@color/blue25"
+                        android:background="@color/secondaryColor"
                         style="@style/style_sign_button"/>
 
                     <Button
                         android:id="@+id/btnSignUp"
                         android:text="@string/sign_up"
+                        android:background="@color/secondaryDarkColor"
                         style="@style/style_sign_button"/>
 
                 </LinearLayout>

@@ -7,7 +7,18 @@ import android.preference.PreferenceManager;
 public class ToolSharedPreferences {
 
     public enum Keys{
+        BASE_URL("http://alsancak.org/api/");
 
+        private String defValue;
+
+        Keys(String defValue) {
+            this.defValue = defValue;
+        }
+
+        @Override
+        public String toString() {
+            return defValue;
+        }
     }
 
     private String TAG=ToolSharedPreferences.class.getSimpleName();
@@ -26,7 +37,7 @@ public class ToolSharedPreferences {
 
     public Integer getSharedPreferencesInteger(Keys key){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Integer status = preferences.getInt(String.valueOf(key), 0);
+        Integer status = preferences.getInt(String.valueOf(key), Integer.parseInt(key.defValue));
         return status;
     }
 
@@ -39,7 +50,7 @@ public class ToolSharedPreferences {
 
     public String getSharedPreferencesString(Keys key){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String status = preferences.getString(String.valueOf(key),"");
+        String status = preferences.getString(String.valueOf(key),key.defValue);
         return status;
     }
 
@@ -52,7 +63,7 @@ public class ToolSharedPreferences {
 
     public Boolean getSharedPreferencesBoolean(Keys key){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Boolean status = preferences.getBoolean(String.valueOf(key), false);
+        Boolean status = preferences.getBoolean(String.valueOf(key), Boolean.parseBoolean(key.defValue));
         return status;
     }
 
@@ -65,7 +76,7 @@ public class ToolSharedPreferences {
 
     public Long getSharedPreferencesLong(Keys key){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Long status = preferences.getLong(String.valueOf(key), 0);
+        Long status = preferences.getLong(String.valueOf(key), Long.parseLong(key.defValue));
         return status;
     }
 
@@ -78,7 +89,7 @@ public class ToolSharedPreferences {
 
     public Float getSharedPreferencesFloat(Keys key){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Float status = preferences.getFloat(String.valueOf(key), 0);
+        Float status = preferences.getFloat(String.valueOf(key), Float.parseFloat(key.defValue));
         return status;
     }
 }

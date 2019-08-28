@@ -4,9 +4,9 @@
     android:shape="rectangle" >
 
     <gradient
-        android:startColor="@color/orange"
-        android:centerColor="@color/orange2"
-        android:endColor="@color/orange"
+        android:startColor="@color/primaryDarkColor"
+        android:centerColor="@color/white"
+        android:endColor="@color/primaryDarkColor"
         android:type="sweep">
     </gradient>
 

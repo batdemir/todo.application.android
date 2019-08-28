@@ -2,8 +2,11 @@ package com.batdemir.android.todolist.application.android.UI.Activities.FirstSec
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,9 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.batdemir.android.todolist.application.android.API.ApiClient;
+import com.batdemir.android.todolist.application.android.R;
+import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
+import com.batdemir.android.todolist.application.android.Tools.ToolSharedPreferences;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements
+        ToolAlertDialog.AlertClickListener {
 
     private Context context;
 
@@ -32,8 +39,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //check_permissions();
-        move();
+        check_permissions();
     }
 
     @Override
@@ -57,11 +63,7 @@ public class SplashActivity extends AppCompatActivity {
                         && grantResults[2] == PackageManager.PERMISSION_GRANTED
                         && grantResults[3] == PackageManager.PERMISSION_GRANTED
                         && grantResults[4] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[5] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[6] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[7] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[8] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[9] == PackageManager.PERMISSION_GRANTED) {
+                        && grantResults[5] == PackageManager.PERMISSION_GRANTED) {
                     move();
                 } else {
                     if(!shouldShowRequestPermissionRationale(permissions[0])
@@ -69,14 +71,11 @@ public class SplashActivity extends AppCompatActivity {
                             ||!shouldShowRequestPermissionRationale(permissions[2])
                             ||!shouldShowRequestPermissionRationale(permissions[3])
                             ||!shouldShowRequestPermissionRationale(permissions[4])
-                            ||!shouldShowRequestPermissionRationale(permissions[5])
-                            ||!shouldShowRequestPermissionRationale(permissions[6])
-                            ||!shouldShowRequestPermissionRationale(permissions[7])
-                            ||!shouldShowRequestPermissionRationale(permissions[8])
-                            ||!shouldShowRequestPermissionRationale(permissions[9])){
-                        //AlertDialogHelper.show_alertDialogForPermission(context,dialog);
+                            ||!shouldShowRequestPermissionRationale(permissions[5])){
+                        ToolAlertDialog
+                                .newInstance("Please activate the permissions in the section \"Applications>"+getString(R.string.app_name)+">Settings\"",false,false)
+                                .show(getSupportFragmentManager(),SplashActivity.class.getSimpleName());
                     }else{
-                        Toast.makeText(this, "Devam etmek için izinler kabul edildi.", Toast.LENGTH_LONG).show();
                         try {
                             Thread.sleep(2000);
                             move();
@@ -93,40 +92,43 @@ public class SplashActivity extends AppCompatActivity {
     //----functions----//
 
     private void check_permissions(){
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA,
+                || checkSelfPermission(Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{
                             Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.VIBRATE,
+                            Manifest.permission.INTERNET,
                             Manifest.permission.ACCESS_NETWORK_STATE,
-                            Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.BLUETOOTH_ADMIN,
-                            Manifest.permission.BLUETOOTH,
-                            Manifest.permission.VIBRATE},
-                    100);
+                            Manifest.permission.ACCESS_WIFI_STATE
+                    }, 100);
         }else{
             move();
         }
     }
 
     private void set_BASEURL() {
-        //ApiClient.BASE_URL = SharedPreferencesHelper.get_sharedPreferencesString(context, SharedPreferencesHelper.SharedPreferencesKeys.baseUrl);
+        ApiClient.BASE_URL = new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.BASE_URL);
         ApiClient.retrofit = null;
-        Log.d("BASEURL",ApiClient.BASE_URL);
+        Log.d("BASE_URL=>\t",ApiClient.BASE_URL);
     }
 
     private void move(){
         set_BASEURL();
-        new Tool(context).move(SignInActivity.class,false,false);
+        new Tool(context).move(SignInActivity.class,true,false);
+    }
+
+    @Override
+    public void alertOkey() {
+
+    }
+
+    @Override
+    public void alertCancel() {
+        onStart();
     }
 }
