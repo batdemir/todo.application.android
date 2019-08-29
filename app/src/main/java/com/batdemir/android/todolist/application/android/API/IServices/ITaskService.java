@@ -12,35 +12,31 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ITaskService {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("ConstantTableTasks")
-    Call<ArrayList<TaskModel>> Get();
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("ConstantTableTasks/{id}")
-    Call<TaskModel> GetByName(
-            @Path("id") String name
+    @GET("Task/GetTasksByUser")
+    Call<ArrayList<TaskModel>> GetTasksByUser(
+            @Query("userName") String userName
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("ConstantTableTasks")
+    @POST("Task/Insert")
     Call<TaskModel> Insert(
             @Body TaskModel taskModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @PUT("ConstantTableTasks/{id}")
+    @PUT("Task/Update")
     Call<TaskModel> Update(
-            @Path("id") String name,
             @Body TaskModel taskModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("ConstantTableTasks/{id}")
+    @DELETE("Task/Delete")
     Call<TaskModel> Delete(
-            @Path("id") String name
+            @Body TaskModel taskModel
     );
 }

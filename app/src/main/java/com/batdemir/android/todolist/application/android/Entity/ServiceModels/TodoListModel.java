@@ -9,27 +9,35 @@ public class TodoListModel implements Serializable {
     @SerializedName("Id")
     private String Id;
 
-    @SerializedName("Name")
-    private String Name;
+    @SerializedName("TodoName")
+    private String TodoName;
 
-    @SerializedName("UserId")
-    private String UserId;
+    @SerializedName("UserName")
+    private String UserName;
 
-    @SerializedName("TaskId")
-    private String TaskId;
+    @SerializedName("TaskName")
+    private String TaskName;
 
-    @SerializedName("StatusId")
-    private String StatusId;
+    @SerializedName("StatusName")
+    private String StatusName;
+
+    @SerializedName("Active")
+    private Boolean Active;
+
+    @SerializedName("CreatedDate")
+    private String CreatedDate;
 
     public TodoListModel() {
     }
 
-    public TodoListModel(String id, String name, String userId, String taskId, String statusId) {
+    public TodoListModel(String id, String todoName, String userName, String taskName, String statusName, Boolean active, String createdDate) {
         Id = id;
-        Name = name;
-        UserId = userId;
-        TaskId = taskId;
-        StatusId = statusId;
+        TodoName = todoName;
+        UserName = userName;
+        TaskName = taskName;
+        StatusName = statusName;
+        Active = active;
+        CreatedDate = createdDate;
     }
 
     public String getId() {
@@ -40,36 +48,52 @@ public class TodoListModel implements Serializable {
         Id = id;
     }
 
-    public String getName() {
-        return Name;
+    public String getTodoName() {
+        return TodoName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setTodoName(String todoName) {
+        TodoName = todoName;
     }
 
-    public String getUserId() {
-        return UserId;
+    public String getUserName() {
+        return UserName;
     }
 
-    public void setUserId(String userId) {
-        UserId = userId;
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
-    public String getTaskId() {
-        return TaskId;
+    public String getTaskName() {
+        return TaskName;
     }
 
-    public void setTaskId(String taskId) {
-        TaskId = taskId;
+    public void setTaskName(String taskName) {
+        TaskName = taskName;
     }
 
-    public String getStatusId() {
-        return StatusId;
+    public String getStatusName() {
+        return StatusName;
     }
 
-    public void setStatusId(String statusId) {
-        StatusId = statusId;
+    public void setStatusName(String statusName) {
+        StatusName = statusName;
+    }
+
+    public Boolean getActive() {
+        return Active;
+    }
+
+    public void setActive(Boolean active) {
+        Active = active;
+    }
+
+    public String getCreatedDate() {
+        return CreatedDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        CreatedDate = createdDate;
     }
 
     @Override
@@ -79,18 +103,16 @@ public class TodoListModel implements Serializable {
 
         TodoListModel that = (TodoListModel) o;
 
-        if (!Name.equals(that.Name)) return false;
-        if (!UserId.equals(that.UserId)) return false;
-        if (!TaskId.equals(that.TaskId)) return false;
-        return StatusId.equals(that.StatusId);
+        if (!TodoName.equals(that.TodoName)) return false;
+        if (!UserName.equals(that.UserName)) return false;
+        return TaskName.equals(that.TaskName);
     }
 
     @Override
     public int hashCode() {
-        int result = Name.hashCode();
-        result = 31 * result + UserId.hashCode();
-        result = 31 * result + TaskId.hashCode();
-        result = 31 * result + StatusId.hashCode();
+        int result = TodoName.hashCode();
+        result = 31 * result + UserName.hashCode();
+        result = 31 * result + TaskName.hashCode();
         return result;
     }
 }

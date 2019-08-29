@@ -16,32 +16,7 @@ import retrofit2.http.Path;
 
 public interface IStatusService {
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("ConstantTableStatus")
-    Call<ArrayList<StatusModel>> Get();
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("ConstantTableStatus")
-    Call<StatusModel> GetByName(
-            @Path("id") String name
-    );
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("ConstantTableStatus")
-    Call<StatusModel> Insert(
-            @Body StatusModel taskModel
-    );
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @PUT("ConstantTableStatus")
-    Call<StatusModel> Update(
-            @Path("id") String name,
-            @Body StatusModel taskModel
-    );
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("ConstantTableStatus")
-    Call<StatusModel> Delete(
-            @Path("id") String name
-    );
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @GET("Status/GetStatus")
+    Call<ArrayList<StatusModel>> GetStatus();
 }

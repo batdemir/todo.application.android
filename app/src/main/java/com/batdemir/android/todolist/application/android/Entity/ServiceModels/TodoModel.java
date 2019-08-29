@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class TaskModel implements Serializable {
+public class TodoModel implements Serializable {
 
     @SerializedName("Id")
     private String Id;
@@ -12,33 +12,21 @@ public class TaskModel implements Serializable {
     @SerializedName("Name")
     private String Name;
 
-    @SerializedName("Description")
-    private String Description;
-
-    @SerializedName("DeadLine")
-    private String DeadLine;
-
-    @SerializedName("PriorityName")
-    private String PriorityName;
-
     @SerializedName("UserName")
     private String UserName;
 
-    @SerializedName("Active")
+    @SerializedName("CreatedDate")
     private Boolean Active;
 
     @SerializedName("CreatedDate")
     private String CreatedDate;
 
-    public TaskModel() {
+    public TodoModel() {
     }
 
-    public TaskModel(String id, String name, String description, String deadLine, String priorityName, String userName, Boolean active, String createdDate) {
+    public TodoModel(String id, String name, String userName, Boolean active, String createdDate) {
         Id = id;
         Name = name;
-        Description = description;
-        DeadLine = deadLine;
-        PriorityName = priorityName;
         UserName = userName;
         Active = active;
         CreatedDate = createdDate;
@@ -58,30 +46,6 @@ public class TaskModel implements Serializable {
 
     public void setName(String name) {
         Name = name;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getDeadLine() {
-        return DeadLine;
-    }
-
-    public void setDeadLine(String deadLine) {
-        DeadLine = deadLine;
-    }
-
-    public String getPriorityName() {
-        return PriorityName;
-    }
-
-    public void setPriorityName(String priorityName) {
-        PriorityName = priorityName;
     }
 
     public String getUserName() {
@@ -111,15 +75,18 @@ public class TaskModel implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TaskModel)) return false;
+        if (!(o instanceof TodoModel)) return false;
 
-        TaskModel taskModel = (TaskModel) o;
+        TodoModel todoModel = (TodoModel) o;
 
-        return Name.equals(taskModel.Name);
+        if (!Name.equals(todoModel.Name)) return false;
+        return UserName.equals(todoModel.UserName);
     }
 
     @Override
     public int hashCode() {
-        return Name.hashCode();
+        int result = Name.hashCode();
+        result = 31 * result + UserName.hashCode();
+        return result;
     }
 }

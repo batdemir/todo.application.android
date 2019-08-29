@@ -9,31 +9,27 @@ import android.os.AsyncTask;
 import androidx.fragment.app.FragmentActivity;
 
 import com.batdemir.android.todolist.application.android.API.ApiClient;
-import com.batdemir.android.todolist.application.android.API.IServices.ITaskService;
-import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TaskModel;
+import com.batdemir.android.todolist.application.android.API.IServices.IPriorityService;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.ToolConnection;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class TaskService<T> implements
+public class PriorityService<T> implements
         ToolAlertDialog.AlertClickListener {
 
     private Context context;
     private boolean connectionAvailable = false;
 
     public enum OperationType{
-        GetTasksByUser,
-        Insert,
-        Update,
-        Delete;
+        Get;
 
         OperationType() {
         }
     }
 
-    public TaskService(Context context) {
+    public PriorityService(Context context) {
         this.context = context;
         connectionAvailable = ToolConnection.isConnected(context);
         if (!connectionAvailable)
@@ -42,32 +38,11 @@ public class TaskService<T> implements
                     .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
     }
 
-    public void GetTasksByUser(String userName) {
+    public void Get() {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.GetTasksByUser).execute(iTaskService.GetTasksByUser(userName));
-    }
-
-    public void Insert(TaskModel taskModel) {
-        if (!connectionAvailable)
-            return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Insert).execute(iTaskService.Insert(taskModel));
-    }
-
-    public void Update(TaskModel taskModel) {
-        if (!connectionAvailable)
-            return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Update).execute(iTaskService.Update(taskModel));
-    }
-
-    public void Delete(TaskModel taskModel) {
-        if (!connectionAvailable)
-            return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Delete).execute(iTaskService.Delete(taskModel));
+        IPriorityService iPriorityService = ApiClient.getClient().create(IPriorityService.class);
+        new ConnectService(context,OperationType.Get).execute(iPriorityService.GetPriority());
     }
 
     @SuppressLint("StaticFieldLeak")

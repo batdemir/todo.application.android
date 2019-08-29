@@ -24,8 +24,6 @@ public class TodoListService<T> implements
     private boolean connectionAvailable = false;
 
     public enum OperationType{
-        Get,
-        GetByName,
         Insert,
         Update,
         Delete;
@@ -43,20 +41,6 @@ public class TodoListService<T> implements
                     .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
     }
 
-    public void Get() {
-        if (!connectionAvailable)
-            return;
-        ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
-        new ConnectService(context,OperationType.Get).execute(iTodoListsService.Get());
-    }
-
-    public void GetByName(String name) {
-        if (!connectionAvailable)
-            return;
-        ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
-        new ConnectService(context,OperationType.GetByName).execute(iTodoListsService.GetByName(name));
-    }
-
     public void Insert(TodoListModel todoListModel) {
         if (!connectionAvailable)
             return;
@@ -64,28 +48,18 @@ public class TodoListService<T> implements
         new ConnectService(context,OperationType.Insert).execute(iTodoListsService.Insert(todoListModel));
     }
 
-    public void Update(String name, TodoListModel todoListModel) {
+    public void Update(TodoListModel todoListModel) {
         if (!connectionAvailable)
             return;
         ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
-        new ConnectService(context,OperationType.Update).execute(iTodoListsService.Update(name, todoListModel));
+        new ConnectService(context,OperationType.Update).execute(iTodoListsService.Update(todoListModel));
     }
 
-    public void Delete(String name) {
+    public void Delete(TodoListModel todoListModel) {
         if (!connectionAvailable)
             return;
         ITodoListsService iTodoListsService = ApiClient.getClient().create(ITodoListsService.class);
-        new ConnectService(context,OperationType.Delete).execute(iTodoListsService.Delete(name));
-    }
-
-    @Override
-    public void alertOkey() {
-
-    }
-
-    @Override
-    public void alertCancel() {
-
+        new ConnectService(context,OperationType.Delete).execute(iTodoListsService.Delete(todoListModel));
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -148,5 +122,15 @@ public class TodoListService<T> implements
     public interface TodoListServiceListener<T> {
         void onSuccess(OperationType operationType, Response<T> response);
         void onFailure();
+    }
+
+    @Override
+    public void alertOkey() {
+
+    }
+
+    @Override
+    public void alertCancel() {
+
     }
 }

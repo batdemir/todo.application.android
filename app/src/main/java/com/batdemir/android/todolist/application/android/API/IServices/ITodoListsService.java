@@ -17,31 +17,20 @@ import retrofit2.http.Path;
 public interface ITodoListsService {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("TableTodoLists")
-    Call<ArrayList<TodoListModel>> Get();
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("TableTodoLists")
-    Call<TodoListModel> GetByName(
-            @Path("id") String name
-    );
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("TableTodoLists")
+    @POST("TodoList/Insert")
     Call<TodoListModel> Insert(
             @Body TodoListModel taskModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @PUT("TableTodoLists")
+    @PUT("TodoList/Update")
     Call<TodoListModel> Update(
-            @Path("id") String name,
             @Body TodoListModel taskModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("TableTodoLists")
+    @DELETE("TodoList/Delete")
     Call<TodoListModel> Delete(
-            @Path("id") String name
+            @Body TodoListModel taskModel
     );
 }

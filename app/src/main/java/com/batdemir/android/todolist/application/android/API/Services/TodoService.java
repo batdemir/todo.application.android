@@ -9,22 +9,21 @@ import android.os.AsyncTask;
 import androidx.fragment.app.FragmentActivity;
 
 import com.batdemir.android.todolist.application.android.API.ApiClient;
-import com.batdemir.android.todolist.application.android.API.IServices.ITaskService;
-import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TaskModel;
+import com.batdemir.android.todolist.application.android.API.IServices.ITodoService;
+import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TodoModel;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.ToolConnection;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class TaskService<T> implements
+public class TodoService<T> implements
         ToolAlertDialog.AlertClickListener {
 
     private Context context;
     private boolean connectionAvailable = false;
 
     public enum OperationType{
-        GetTasksByUser,
         Insert,
         Update,
         Delete;
@@ -33,7 +32,7 @@ public class TaskService<T> implements
         }
     }
 
-    public TaskService(Context context) {
+    public TodoService(Context context) {
         this.context = context;
         connectionAvailable = ToolConnection.isConnected(context);
         if (!connectionAvailable)
@@ -42,32 +41,25 @@ public class TaskService<T> implements
                     .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
     }
 
-    public void GetTasksByUser(String userName) {
+    public void Insert(TodoModel todoModel) {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.GetTasksByUser).execute(iTaskService.GetTasksByUser(userName));
+        ITodoService iTodoService = ApiClient.getClient().create(ITodoService.class);
+        new ConnectService(context,OperationType.Insert).execute(iTodoService.Insert(todoModel));
     }
 
-    public void Insert(TaskModel taskModel) {
+    public void Update(TodoModel todoModel) {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Insert).execute(iTaskService.Insert(taskModel));
+        ITodoService iTodoService = ApiClient.getClient().create(ITodoService.class);
+        new ConnectService(context,OperationType.Update).execute(iTodoService.Update(todoModel));
     }
 
-    public void Update(TaskModel taskModel) {
+    public void Delete(TodoModel todoModel) {
         if (!connectionAvailable)
             return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Update).execute(iTaskService.Update(taskModel));
-    }
-
-    public void Delete(TaskModel taskModel) {
-        if (!connectionAvailable)
-            return;
-        ITaskService iTaskService = ApiClient.getClient().create(ITaskService.class);
-        new ConnectService(context,OperationType.Delete).execute(iTaskService.Delete(taskModel));
+        ITodoService iTodoService = ApiClient.getClient().create(ITodoService.class);
+        new ConnectService(context,OperationType.Delete).execute(iTodoService.Delete(todoModel));
     }
 
     @SuppressLint("StaticFieldLeak")

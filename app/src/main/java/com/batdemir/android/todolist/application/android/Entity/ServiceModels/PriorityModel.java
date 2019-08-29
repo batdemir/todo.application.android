@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class StatusModel implements Serializable {
+public class PriorityModel implements Serializable {
 
     @SerializedName("Id")
     private String Id;
@@ -18,10 +18,10 @@ public class StatusModel implements Serializable {
     @SerializedName("OrderNo")
     private Integer OrderNo;
 
-    public StatusModel() {
+    public PriorityModel() {
     }
 
-    public StatusModel(String id, String name, Boolean active, Integer orderNo) {
+    public PriorityModel(String id, String name, Boolean active, Integer orderNo) {
         Id = id;
         Name = name;
         Active = active;
@@ -63,9 +63,9 @@ public class StatusModel implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof StatusModel)) return false;
+        if (!(o instanceof PriorityModel)) return false;
 
-        StatusModel that = (StatusModel) o;
+        PriorityModel that = (PriorityModel) o;
 
         return Name.equals(that.Name);
     }

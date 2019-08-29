@@ -13,36 +13,34 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface IUserService {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("ConstantTableUsers")
-    Call<ArrayList<UserModel>> Get();
-
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("ConstantTableUsers/{id}")
-    Call<UserModel> GetByName(
-            @Path("id") String name
+    @GET("User/Login")
+    Call<UserModel> Login(
+            @Query("userName") String userName,
+            @Query("userPassword") String userPassword
     );
 
+
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("ConstantTableUsers")
+    @POST("User/Insert")
     Call<UserModel> Insert(
-            @Body UserModel userModel
+            @Body UserModel taskModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @PUT("ConstantTableUsers/{id}")
+    @PUT("User/Update")
     Call<UserModel> Update(
-            @Path("id") String name,
-            @Body UserModel userModel
+            @Body UserModel taskModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("ConstantTableUsers/{id}")
+    @DELETE("User/Delete")
     Call<UserModel> Delete(
-            @Path("id") String name
+            @Body UserModel taskModel
     );
 
 }

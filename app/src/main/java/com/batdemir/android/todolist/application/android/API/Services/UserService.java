@@ -29,8 +29,7 @@ public class UserService<T> implements
     private boolean connectionAvailable = false;
 
     public enum OperationType{
-        Get,
-        GetByName,
+        Login,
         Insert,
         Update,
         Delete;
@@ -48,18 +47,11 @@ public class UserService<T> implements
                     .show(((FragmentActivity) context).getSupportFragmentManager(),UserService.class.getSimpleName());
     }
 
-    public void Get(){
+    public void Login(String userName, String userPassword){
         if(!connectionAvailable)
             return;
         IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.Get).execute(iUserService.Get());
-    }
-
-    public void GetByName(String name){
-        if(!connectionAvailable)
-            return;
-        IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.GetByName).execute(iUserService.GetByName(name));
+        new ConnectService(context,OperationType.Login).execute(iUserService.Login(userName,userPassword));
     }
 
     public void Insert(UserModel userModel){
@@ -69,28 +61,18 @@ public class UserService<T> implements
         new ConnectService(context,OperationType.Insert).execute(iUserService.Insert(userModel));
     }
 
-    public void Update(String name, UserModel userModel){
+    public void Update(UserModel userModel){
         if(!connectionAvailable)
             return;
         IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.Update).execute(iUserService.Update(name, userModel));
+        new ConnectService(context,OperationType.Update).execute(iUserService.Update(userModel));
     }
 
-    public void Delete(String name){
+    public void Delete(UserModel userModel){
         if(!connectionAvailable)
             return;
         IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.Delete).execute(iUserService.Delete(name));
-    }
-
-    @Override
-    public void alertOkey() {
-
-    }
-
-    @Override
-    public void alertCancel() {
-
+        new ConnectService(context,OperationType.Delete).execute(iUserService.Delete(userModel));
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -153,5 +135,15 @@ public class UserService<T> implements
     public interface UserServiceListener<T>{
         void onSuccess(OperationType operationType,Response<T> response);
         void onFailure();
+    }
+
+    @Override
+    public void alertOkey() {
+
+    }
+
+    @Override
+    public void alertCancel() {
+
     }
 }
