@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import retrofit2.Response;
 
 public class TodoListActivity extends BaseActivity implements
-        CustomService.CustomServiceListener {
+        CustomService.CustomServiceListener,
+        TodoListService.TodoListServiceListener {
 
     private Context context;
     private ActivityTodoListBinding binding;
@@ -61,6 +62,20 @@ public class TodoListActivity extends BaseActivity implements
                  binding.recyclerViewTodoList.setItemViewCacheSize(((ArrayList<CustomTodoModel>) response.body()).size());
                  break;
          }
+    }
+
+    @Override
+    public void onSuccess(TodoListService.OperationType operationType, Response response) {
+        switch (operationType){
+            case Insert:
+                break;
+            case Update:
+                new CustomService<>(context).Get(GlobalVariable.userModel.getUserName());
+                break;
+            case Delete:
+                new CustomService<>(context).Get(GlobalVariable.userModel.getUserName());
+                break;
+        }
     }
 
     @Override

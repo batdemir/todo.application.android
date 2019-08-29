@@ -35,7 +35,7 @@ public interface ITaskService {
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("Task/Delete")
+    @POST("Task/Delete")
     Call<TaskModel> Delete(
             @Body TaskModel taskModel
     );

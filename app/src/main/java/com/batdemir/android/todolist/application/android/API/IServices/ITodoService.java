@@ -24,7 +24,7 @@ public interface ITodoService {
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("Todo/Delete")
+    @POST("Todo/Delete")
     Call<TodoModel> Delete(
             @Body TodoModel todoModel
     );

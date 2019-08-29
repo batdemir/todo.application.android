@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.batdemir.android.todolist.application.android.API.Services.TaskService;
+import com.batdemir.android.todolist.application.android.API.Services.TodoListService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoModel;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoTasksModel;
+import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TodoListModel;
 import com.batdemir.android.todolist.application.android.GlobalVar.GlobalVariable;
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.RecyclerViewTools.SwipeToCompleteCallback;
@@ -57,10 +60,21 @@ public class AdapterRecyclerViewTodoList extends RecyclerView.Adapter {
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                     final int position = viewHolder.getAdapterPosition();
                     final CustomTodoTasksModel item = adapterRecyclerViewTodoListTasks.getModels().get(position);
+                    final TodoListModel todoListModel = new TodoListModel(
+                            item.getId(),
+                            item.getTodoName(),
+                            item.getUserName(),
+                            item.getTaskName(),
+                            item.getStatusName(),
+                            item.getActive(),
+                            item.getCreatedDate()
+                    );
+                    new TodoListService<>(context).Delete(todoListModel);
                     Snackbar snackbar = Snackbar.make(binding.rootRecyclerViewItemTodoList, item.getTaskName()+" was removed from the list.", Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            new TodoListService<>(context).Insert(todoListModel);
                         }
                     });
                     snackbar.setActionTextColor(context.getColor(R.color.white));
@@ -72,10 +86,22 @@ public class AdapterRecyclerViewTodoList extends RecyclerView.Adapter {
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                     final int position = viewHolder.getAdapterPosition();
                     final CustomTodoTasksModel item = adapterRecyclerViewTodoListTasks.getModels().get(position);
+                    final TodoListModel todoListModel = new TodoListModel(
+                            item.getId(),
+                            item.getTodoName(),
+                            item.getUserName(),
+                            item.getTaskName(),
+                            "Completed",
+                            item.getActive(),
+                            item.getCreatedDate()
+                    );
+                    new TodoListService<>(context).Update(todoListModel);
                     Snackbar snackbar = Snackbar.make(binding.rootRecyclerViewItemTodoList, item.getTaskName()+" was completed from the list.", Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            todoListModel.setStatusName("Created");
+                            new TodoListService<>(context).Update(todoListModel);
                         }
                     });
                     snackbar.setActionTextColor(context.getColor(R.color.white));

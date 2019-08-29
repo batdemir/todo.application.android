@@ -4,52 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class CustomTodoTasksModel implements Serializable {
-
-    @SerializedName("TodoListId")
-    private String TodoListId;
-
-    @SerializedName("TaskName")
-    private String TaskName;
+public class CustomTodoTasksModel extends TodoListModel implements Serializable {
 
     @SerializedName("PriorityName")
     private String PriorityName;
-
-    @SerializedName("StatusName")
-    private String StatusName;
-
-    @SerializedName("UserName")
-    private String UserName;
 
     @SerializedName("DeadLine")
     private String DeadLine;
 
     public CustomTodoTasksModel() {
-    }
-
-    public CustomTodoTasksModel(String todoListId, String taskName, String priorityName, String statusName, String userName, String deadLine) {
-        TodoListId = todoListId;
-        TaskName = taskName;
-        PriorityName = priorityName;
-        StatusName = statusName;
-        UserName = userName;
-        DeadLine = deadLine;
-    }
-
-    public String getTodoListId() {
-        return TodoListId;
-    }
-
-    public void setTodoListId(String todoListId) {
-        TodoListId = todoListId;
-    }
-
-    public String getTaskName() {
-        return TaskName;
-    }
-
-    public void setTaskName(String taskName) {
-        TaskName = taskName;
     }
 
     public String getPriorityName() {
@@ -58,22 +21,6 @@ public class CustomTodoTasksModel implements Serializable {
 
     public void setPriorityName(String priorityName) {
         PriorityName = priorityName;
-    }
-
-    public String getStatusName() {
-        return StatusName;
-    }
-
-    public void setStatusName(String statusName) {
-        StatusName = statusName;
-    }
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
     }
 
     public String getDeadLine() {

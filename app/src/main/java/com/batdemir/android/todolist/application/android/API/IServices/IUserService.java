@@ -38,7 +38,7 @@ public interface IUserService {
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @DELETE("User/Delete")
+    @POST("User/Delete")
     Call<UserModel> Delete(
             @Body UserModel taskModel
     );
