@@ -16,13 +16,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.batdemir.android.todolist.application.android.R;
-import com.batdemir.android.todolist.application.android.Tools.ButtonTools.ButtonRules;
 import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTouchEvent;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActions;
 import com.batdemir.android.todolist.application.android.databinding.AlertDialogBinding;
 
-public class ToolAlertDialog extends DialogFragment implements BaseActions, ButtonRules {
+public class ToolAlertDialog extends DialogFragment implements BaseActions {
 
     private AlertDialogBinding binding;
     private static final String key_message = "KEY_MESSAGE";
@@ -61,11 +60,17 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions, Butt
     @Override
     public void loadData() {
         binding.txtEditMessage.setText(message);
-        defineButtons();
     }
 
     @Override
     public void setListeners() {
+        binding.btnOkey.setOnTouchListener(new OnTouchEvent(binding.btnOkey));
+        if (showCancelButton) {
+            binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
+        } else {
+            binding.btnCancel.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0));
+        }
+
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,16 +90,6 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions, Butt
                 dismiss();
             }
         });
-    }
-
-    @Override
-    public void defineButtons() {
-        binding.btnOkey.setOnTouchListener(new OnTouchEvent(binding.btnOkey));
-        if (showCancelButton) {
-            binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
-        } else {
-            binding.btnCancel.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0));
-        }
     }
 
     public interface AlertClickListener{

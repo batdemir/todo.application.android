@@ -154,35 +154,18 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
 
-                            <LinearLayout
-                                android:id="@+id/linearPriorty"
+                            <Spinner
+                                android:id="@+id/spinnerPriority"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                app:layout_constraintTop_toTopOf="@+id/imgPriorty"
-                                app:layout_constraintBottom_toBottomOf="@id/imgPriorty"
-                                app:layout_constraintStart_toEndOf="@id/imgPriorty">
-
-                                <TextView
-                                    android:id="@+id/txtPriorty"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/priorty"
-                                    android:textColor="@color/black"
-                                    android:fontFamily="@font/roboto_bold"
-                                    app:layout_constraintStart_toEndOf="@+id/imgPriorty"
-                                    app:layout_constraintTop_toTopOf="@id/imgPriorty" />
-
-                                <TextView
-                                    android:id="@+id/txtEditPriort"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:fontFamily="@font/roboto"
-                                    app:layout_constraintBottom_toBottomOf="@id/imgPriorty"
-                                    app:layout_constraintStart_toEndOf="@+id/imgPriorty" />
-
-                            </LinearLayout>
+                                android:background="@drawable/background_spinner"
+                                android:entries="@array/priority_list"
+                                android:spinnerMode="dropdown"
+                                android:paddingEnd="24dp"
+                                style=""
+                                app:layout_constraintBottom_toBottomOf="@+id/imgPriorty"
+                                app:layout_constraintStart_toEndOf="@+id/imgPriorty"
+                                app:layout_constraintTop_toTopOf="@+id/imgPriorty" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,8 +15,8 @@ public class UserModel implements Serializable {
     @SerializedName("UserPassword")
     private String UserPassword;
 
-    @SerializedName("Name")
-    private String Name;
+    @SerializedName("FirstName")
+    private String FirstName;
 
     @SerializedName("SurName")
     private String SurName;
@@ -33,11 +33,11 @@ public class UserModel implements Serializable {
     public UserModel() {
     }
 
-    public UserModel(String id, String userName, String userPassword, String name, String surName, String email, Boolean active, String createdDate) {
+    public UserModel(String id, String userName, String userPassword, String firstName, String surName, String email, Boolean active, String createdDate) {
         Id = id;
         UserName = userName;
         UserPassword = userPassword;
-        Name = name;
+        FirstName = firstName;
         SurName = surName;
         Email = email;
         Active = active;
@@ -68,12 +68,12 @@ public class UserModel implements Serializable {
         UserPassword = userPassword;
     }
 
-    public String getName() {
-        return Name;
+    public String getFirstName() {
+        return FirstName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
     }
 
     public String getSurName() {

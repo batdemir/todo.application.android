@@ -14,18 +14,18 @@ public interface ITodoService {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("Todo/Insert")
     Call<TodoModel> Insert(
-            @Body TodoModel taskModel
+            @Body TodoModel todoModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @PUT("Todo/Update")
     Call<TodoModel> Update(
-            @Body TodoModel taskModel
+            @Body TodoModel todoModel
     );
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @DELETE("Todo/Delete")
     Call<TodoModel> Delete(
-            @Body TodoModel taskModel
+            @Body TodoModel todoModel
     );
 }

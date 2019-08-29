@@ -23,4 +23,17 @@
     <string name="todo_list_name">Todo List Name</string>
     <string name="selected_tasks">Selected Tasks</string>
     <string name="selectable_tasks">Selectable Tasks</string>
+
+
+    <string-array name="status_list">
+        <item>Created</item>
+        <item>Progressing</item>
+        <item>Completed</item>
+    </string-array>
+
+    <string-array name="priority_list">
+        <item>Normal</item>
+        <item>High</item>
+        <item>Low</item>
+    </string-array>
 </resources>

@@ -52,7 +52,7 @@ public class TaskDefinationActivity extends BaseActivity implements
 
     @Override
     public void loadData() {
-        new TaskService<>(context).Get();
+        new TaskService<>(context).GetTasksByUser(GlobalVariable.userModel.getUserName());
     }
 
     @Override
@@ -92,6 +92,9 @@ public class TaskDefinationActivity extends BaseActivity implements
                 binding.editTextName.getText().toString(),
                 binding.editTextNotes.getText().toString(),
                 new ToolTimeExpressions().setDateFormat(binding.txtEditDeadLineCalender.getText().toString()+" "+binding.txtEditDeadLineClock.getText().toString(), GlobalVariable.DateFormat.SHOW_FULL_FORMAT, GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT),
+                binding.spinnerPriority.getSelectedItem().toString(),
+                GlobalVariable.userModel.getUserName(),
+                Boolean.TRUE,
                 new ToolTimeExpressions().setDateToString(Calendar.getInstance().getTime(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT)
         );
     }
@@ -99,7 +102,7 @@ public class TaskDefinationActivity extends BaseActivity implements
     private void clickFloatButton(){
         if(controlInputs()){
             if(binding.floatingActionButton.getTag() != null){
-                new TaskService<>(context).Update(binding.floatingActionButton.getTag().toString(),getTaskModel());
+                new TaskService<>(context).Update(getTaskModel());
             }else {
                 new TaskService<>(context).Insert(getTaskModel());
             }
@@ -110,7 +113,7 @@ public class TaskDefinationActivity extends BaseActivity implements
     public void onSuccess(TaskService.OperationType operationType, Response response) {
         assert response.body() != null;
         switch (operationType) {
-            case Get:
+            case GetTasksByUser:
                 AdapterRecyclerViewTasks adapterRecyclerViewTasks = new AdapterRecyclerViewTasks(context, (ArrayList<TaskModel>) response.body());
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false);
                 binding.recyclerViewTasks.setAdapter(adapterRecyclerViewTasks);
@@ -121,7 +124,7 @@ public class TaskDefinationActivity extends BaseActivity implements
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                         final int position = viewHolder.getAdapterPosition();
                         final TaskModel item = adapterRecyclerViewTasks.getModels().get(position);
-                        new TaskService<>(context).Delete(item.getName());
+                        new TaskService<>(context).Delete(item);
                         Snackbar snackbar = Snackbar.make(binding.rootTaskDefination, item.getName()+" was removed from the list.", Snackbar.LENGTH_LONG);
                         snackbar.setAction("UNDO", new View.OnClickListener() {
                             @Override
@@ -135,18 +138,9 @@ public class TaskDefinationActivity extends BaseActivity implements
                     }
                 }).attachToRecyclerView(binding.recyclerViewTasks);
                 break;
-            case GetByName:
-                TaskModel taskModel = (TaskModel) response.body();
-                binding.floatingActionButton.setTag(taskModel.getName());
-                binding.floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_tick_mini));
-                binding.editTextName.setText(taskModel.getName());
-                binding.editTextNotes.setText(taskModel.getDescription());
-                binding.txtEditDeadLineCalender.setText(new ToolTimeExpressions().setDateFormat(taskModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
-                binding.txtEditDeadLineClock.setText(new ToolTimeExpressions().setDateFormat(taskModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
-                break;
             case Insert:
             case Update:
-                new TaskService<>(context).Get();
+                new TaskService<>(context).GetTasksByUser(GlobalVariable.userModel.getUserName());
                 binding.floatingActionButton.setTag(null);
                 binding.floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_add_mini));
                 binding.editTextName.setText("");
@@ -155,7 +149,7 @@ public class TaskDefinationActivity extends BaseActivity implements
                 binding.txtEditDeadLineClock.setText("");
                 break;
             case Delete:
-                new TaskService<>(context).Get();
+                new TaskService<>(context).GetTasksByUser(GlobalVariable.userModel.getUserName());
                 break;
         }
     }
@@ -167,7 +161,19 @@ public class TaskDefinationActivity extends BaseActivity implements
 
     @Override
     public void onItemClick(TaskModel taskModel) {
-        new TaskService<>(context).GetByName(taskModel.getName());
+        binding.floatingActionButton.setTag(taskModel.getName());
+        binding.floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_tick_mini));
+        binding.editTextName.setText(taskModel.getName());
+        binding.editTextNotes.setText(taskModel.getDescription());
+        binding.txtEditDeadLineCalender.setText(new ToolTimeExpressions().setDateFormat(taskModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
+        binding.txtEditDeadLineClock.setText(new ToolTimeExpressions().setDateFormat(taskModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
+
+        String[] priorityList = getResources().getStringArray(R.array.priority_list);
+        for(int i=0;i<priorityList.length;i++){
+            if(priorityList[i].equals(taskModel.getPriorityName())){
+                binding.spinnerPriority.setSelection(i,true);
+            }
+        }
     }
 
     @Override

@@ -6,20 +6,15 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
-import com.batdemir.android.todolist.application.android.API.ApiClient;
 import com.batdemir.android.todolist.application.android.API.Services.UserService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.UserModel;
 import com.batdemir.android.todolist.application.android.GlobalVar.GlobalVariable;
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
-import com.batdemir.android.todolist.application.android.Tools.ButtonTools.ButtonRules;
 import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTouchEvent;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.CharCountValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.ConfirmPasswordValidWatcher;
-import com.batdemir.android.todolist.application.android.Tools.EditTextTools.EditTextRules;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.EmailValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.Tools.ToolTimeExpressions;
@@ -34,8 +29,6 @@ import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity implements
         BaseActions,
-        EditTextRules,
-        ButtonRules,
         ToolAlertDialog.AlertClickListener,
         UserService.UserServiceListener {
 
@@ -65,12 +58,19 @@ public class SignUpActivity extends AppCompatActivity implements
 
     @Override
     public void loadData() {
-        defineEditTexts();
-        defineButtons();
+
     }
 
     @Override
     public void setListeners() {
+        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextFirstName));
+        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextSurName));
+        binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserName));
+        binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserPassword));
+        binding.editTextConfirmUserPassword.addTextChangedListener(new ConfirmPasswordValidWatcher(binding.editTextUserPassword,binding.editTextConfirmUserPassword));
+        binding.editTextEmail.addTextChangedListener(new EmailValidWatcher(binding.editTextEmail));
+        binding.btnSignUp.setOnTouchListener(new OnTouchEvent(binding.btnSignUp));
+
         binding.btnSignUp.setOnClickListener(v -> {
             if(controlInputs())
                 new UserService<>(context).Insert(getUserModel());
@@ -111,23 +111,24 @@ public class SignUpActivity extends AppCompatActivity implements
                 binding.editTextFirstName.getText().toString(),
                 binding.editTextSurName.getText().toString(),
                 binding.editTextEmail.getText().toString(),
+                Boolean.TRUE,
                 new ToolTimeExpressions().setDateToString(Calendar.getInstance().getTime(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT)
         );
     }
 
     @Override
-    public void defineEditTexts() {
-        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextFirstName));
-        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextSurName));
-        binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserName));
-        binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserPassword));
-        binding.editTextConfirmUserPassword.addTextChangedListener(new ConfirmPasswordValidWatcher(binding.editTextUserPassword,binding.editTextConfirmUserPassword));
-        binding.editTextEmail.addTextChangedListener(new EmailValidWatcher(binding.editTextEmail));
+    public void onSuccess(UserService.OperationType operationType, Response response) {
+        switch (operationType){
+            case Insert:
+                Snackbar.make(binding.rootSignIn ,"You have successfully registered. Please Login.",Snackbar.LENGTH_SHORT).show();
+                new Tool(context).move(SignInActivity.class,true,false);
+                break;
+        }
     }
 
     @Override
-    public void defineButtons() {
-        binding.btnSignUp.setOnTouchListener(new OnTouchEvent(binding.btnSignUp));
+    public void onFailure() {
+
     }
 
     @Override
@@ -137,29 +138,6 @@ public class SignUpActivity extends AppCompatActivity implements
 
     @Override
     public void alertCancel() {
-
-    }
-
-    @Override
-    public void onSuccess(UserService.OperationType operationType, Response response) {
-        switch (operationType){
-            case Get:
-                break;
-            case GetByName:
-                break;
-            case Insert:
-                Snackbar.make(binding.rootSignIn ,"You have successfully registered. Please Login.",Snackbar.LENGTH_SHORT).show();
-                new Tool(context).move(SignInActivity.class,true,false);
-                break;
-            case Update:
-                break;
-            case Delete:
-                break;
-        }
-    }
-
-    @Override
-    public void onFailure() {
 
     }
 }

@@ -15,7 +15,7 @@ public class TodoModel implements Serializable {
     @SerializedName("UserName")
     private String UserName;
 
-    @SerializedName("CreatedDate")
+    @SerializedName("Active")
     private Boolean Active;
 
     @SerializedName("CreatedDate")

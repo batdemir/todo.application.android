@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item
+                android:id="@+id/spinnerStyle">
+                <shape>
+                    <padding
+                        android:top="8dp"
+                        android:bottom="8dp"
+                        android:left="0dp"
+                        android:right="0dp"/>
+                    <solid
+                        android:color="@android:color/transparent"/>
+                </shape>
+            </item>
+            <item
+                android:id="@+id/spinnerIcon"
+                android:gravity="right"
+                android:drawable="@drawable/ic_spinner_arrow_mini">
+            </item>
+        </layer-list>
+    </item>
+</selector>

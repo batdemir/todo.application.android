@@ -44,7 +44,7 @@ public class AdapterRecyclerViewTasks extends RecyclerView.Adapter {
             binding.txtEditItemName.setText(itemModel.getName());
             binding.txtEditDeadLineCalender.setText(new ToolTimeExpressions().setDateFormat(itemModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
             binding.txtEditDeadLineClock.setText(new ToolTimeExpressions().setDateFormat(itemModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
-            binding.txtEditPriort.setText("Normal");
+            binding.txtEditPriort.setText(itemModel.getPriorityName());
         }
 
         @Override

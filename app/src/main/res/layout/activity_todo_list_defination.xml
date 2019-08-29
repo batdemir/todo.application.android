@@ -34,6 +34,7 @@
                         <EditText
                             android:id="@+id/editTextName"
                             android:inputType="text"
+                            android:imeOptions="actionDone"
                             style="@style/style_other_edittext"/>
 
                     </com.google.android.material.textfield.TextInputLayout>

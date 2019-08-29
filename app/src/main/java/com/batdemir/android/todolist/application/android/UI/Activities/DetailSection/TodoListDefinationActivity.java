@@ -14,17 +14,22 @@ import android.widget.Toast;
 
 import com.batdemir.android.todolist.application.android.API.Services.TaskService;
 import com.batdemir.android.todolist.application.android.API.Services.TodoListService;
+import com.batdemir.android.todolist.application.android.API.Services.TodoService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TaskModel;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TodoListModel;
+import com.batdemir.android.todolist.application.android.Entity.ServiceModels.TodoModel;
+import com.batdemir.android.todolist.application.android.GlobalVar.GlobalVariable;
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.RecyclerViewTools.SwipeToDeleteCallback;
+import com.batdemir.android.todolist.application.android.Tools.ToolTimeExpressions;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewSelectTasks;
 import com.batdemir.android.todolist.application.android.databinding.ActivityTodoListDefinationBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 import retrofit2.Response;
@@ -32,6 +37,7 @@ import retrofit2.Response;
 public class TodoListDefinationActivity extends BaseActivity implements
         AdapterRecyclerViewSelectTasks.TasksItemListener,
         TaskService.TaskServiceListener,
+        TodoService.TaskServiceListener,
         TodoListService.TodoListServiceListener,
         ToolAlertDialog.AlertClickListener{
 
@@ -55,7 +61,7 @@ public class TodoListDefinationActivity extends BaseActivity implements
 
     @Override
     public void loadData() {
-        new TaskService<>(context).Get();
+        new TaskService<>(context).GetTasksByUser(GlobalVariable.userModel.getUserName());
     }
 
     @Override
@@ -85,56 +91,62 @@ public class TodoListDefinationActivity extends BaseActivity implements
         }
     }
 
+    private TodoModel getTodoModel(){
+        return new TodoModel(
+                UUID.randomUUID().toString(),
+                binding.editTextName.getText().toString(),
+                GlobalVariable.userModel.getUserName(),
+                Boolean.TRUE,
+                new ToolTimeExpressions().setDateToString(Calendar.getInstance().getTime(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT)
+        );
+    }
+
     private TodoListModel getTodoListModel(TaskModel taskModel){
         return new TodoListModel(
                 UUID.randomUUID().toString(),
                 binding.editTextName.getText().toString(),
-                "b0e96c12-70f2-4535-b5aa-d0a9d573cad9",
-                taskModel.getId(),
-                "C03E85F8-9305-4560-B070-D31208D495BF"
+                GlobalVariable.userModel.getUserName(),
+                taskModel.getName(),
+                "Created",
+                Boolean.TRUE,
+                new ToolTimeExpressions().setDateToString(Calendar.getInstance().getTime(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT)
         );
     }
 
     private void clickFloatButton(){
         if(controlInputs()){
-            for(int i=0;i<taskModels.size();i++){
-                new TodoListService<>(context).Insert(getTodoListModel(taskModels.get(i)));
-            }
+            new TodoService<>(context).Insert(getTodoModel());
         }
     }
 
     @Override
     public void onSuccess(TaskService.OperationType operationType, Response response) {
         switch (operationType){
-            case Get:
+            case GetTasksByUser:
                 AdapterRecyclerViewSelectTasks adapterRecyclerViewSelectableTasks = new AdapterRecyclerViewSelectTasks(context, (ArrayList<TaskModel>) response.body());
                 binding.recyclerViewSelectableTasks.setAdapter(adapterRecyclerViewSelectableTasks);
                 binding.recyclerViewSelectableTasks.setItemViewCacheSize(((ArrayList<TaskModel>) response.body()).size());
                 binding.recyclerViewSelectableTasks.setLayoutManager(new GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false));
                 break;
-            case GetByName:
-                break;
+        }
+    }
+
+    @Override
+    public void onSuccess(TodoService.OperationType operationType, Response response) {
+        switch (operationType){
             case Insert:
-                break;
-            case Update:
-                break;
-            case Delete:
-                break;
+                for(int i=0;i<taskModels.size();i++){
+                    new TodoListService<>(context).Insert(getTodoListModel(taskModels.get(i)));
+                }
         }
     }
 
     @Override
     public void onSuccess(TodoListService.OperationType operationType, Response response) {
         switch (operationType){
-            case Get:
-                break;
-            case GetByName:
-                break;
             case Insert:
-                break;
-            case Update:
-                break;
-            case Delete:
+                binding.editTextName.setText("");
+                new TaskService<>(context).GetTasksByUser(GlobalVariable.userModel.getUserName());
                 break;
         }
     }

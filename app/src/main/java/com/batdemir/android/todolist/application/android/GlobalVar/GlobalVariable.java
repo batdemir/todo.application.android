@@ -1,6 +1,11 @@
 package com.batdemir.android.todolist.application.android.GlobalVar;
 
+import com.batdemir.android.todolist.application.android.Entity.ServiceModels.UserModel;
+
 public abstract class GlobalVariable {
+
+    public static UserModel userModel;
+
     public enum DateFormat{
         CALENDER_DATE_FORMAT("EEE MMM dd hh:mm:ss 'GMT'Z yyyy"),
         DEFAULT_DATE_FORMAT("yyyy-MM-dd'T'HH:mm:ss"),
