@@ -2,7 +2,6 @@ package com.batdemir.android.todolist.application.android.Tools.RecyclerViewTool
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -17,34 +16,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.batdemir.android.todolist.application.android.R;
 
-public abstract class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
+public abstract class SwipeToCompleteCallback extends ItemTouchHelper.Callback {
     private Context mContext;
     private Paint mClearPaint;
     private ColorDrawable mBackground;
     private int backgroundColor;
-    private Drawable deleteDrawable;
+    private Drawable completeDrawable;
     private int intrinsicWidth;
     private int intrinsicHeight;
     private boolean isSmallIcon=false;
 
-    public SwipeToDeleteCallback(Context context, Boolean isSmallIcon) {
+    public SwipeToCompleteCallback(Context context, Boolean isSmallIcon) {
         mContext = context;
         mBackground = new ColorDrawable();
-        backgroundColor = mContext.getColor(R.color.secondaryColor);
+        backgroundColor = mContext.getColor(R.color.green);
         mClearPaint = new Paint();
         mClearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         if(isSmallIcon){
-            deleteDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_garbage_small);
+            completeDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_success_mini);
         }else {
-            deleteDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_garbage_medium);
+            completeDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_success_medium);
         }
-        intrinsicWidth = deleteDrawable.getIntrinsicWidth();
-        intrinsicHeight = deleteDrawable.getIntrinsicHeight();
+        intrinsicWidth = completeDrawable.getIntrinsicWidth();
+        intrinsicHeight = completeDrawable.getIntrinsicHeight();
     }
 
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-        return makeMovementFlags(0, ItemTouchHelper.LEFT);
+        return makeMovementFlags(0, ItemTouchHelper.RIGHT);
     }
 
     @Override
@@ -59,20 +58,20 @@ public abstract class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
         int itemHeight = itemView.getHeight();
         boolean isCancelled = dX == 0 && !isCurrentlyActive;
         if (isCancelled) {
-            clearCanvas(c, itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+            clearCanvas(c, itemView.getLeft() + dX, (float) itemView.getTop(), (float) itemView.getLeft(), (float) itemView.getBottom());
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             return;
         }
         mBackground.setColor(backgroundColor);
-        mBackground.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
+        mBackground.setBounds(itemView.getLeft() + (int) dX, itemView.getTop(), itemView.getLeft(), itemView.getBottom());
         mBackground.draw(c);
-        int deleteIconTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
-        int deleteIconMargin = (itemHeight - intrinsicHeight) / 2;
-        int deleteIconLeft = itemView.getRight() - deleteIconMargin - intrinsicWidth;
-        int deleteIconRight = itemView.getRight() - deleteIconMargin;
-        int deleteIconBottom = deleteIconTop + intrinsicHeight;
-        deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom);
-        deleteDrawable.draw(c);
+        int completeIconTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
+        int completeIconMargin = (itemHeight - intrinsicHeight) / 2;
+        int completeIconLeft = itemView.getLeft() + completeIconMargin;
+        int completeIconRight = itemView.getLeft() + completeIconMargin + intrinsicWidth;
+        int completeIconBottom = completeIconTop + intrinsicHeight;
+        completeDrawable.setBounds(completeIconLeft, completeIconTop, completeIconRight, completeIconBottom);
+        completeDrawable.draw(c);
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 

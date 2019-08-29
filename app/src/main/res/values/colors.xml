@@ -51,10 +51,10 @@
     <color name="yellow50">#50FFFF00</color>
     <color name="yellow25">#25FFFF00</color>
 
-    <color name="green">#00FF00</color>
-    <color name="green75">#7500FF00</color>
-    <color name="green50">#5000FF00</color>
-    <color name="green25">#2500FF00</color>
+    <color name="green">#2e7d32</color>
+    <color name="green75">#752e7d32</color>
+    <color name="green50">#502e7d32</color>
+    <color name="green25">#252e7d32</color>
 
     <color name="orange">#FFBF7F</color>
     <color name="orange75">#75FFBF7F</color>

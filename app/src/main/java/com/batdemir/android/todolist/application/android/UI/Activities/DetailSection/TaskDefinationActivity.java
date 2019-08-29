@@ -119,7 +119,7 @@ public class TaskDefinationActivity extends BaseActivity implements
                 binding.recyclerViewTasks.setAdapter(adapterRecyclerViewTasks);
                 binding.recyclerViewTasks.setLayoutManager(gridLayoutManager);
                 binding.recyclerViewTasks.setItemViewCacheSize(((ArrayList<TaskModel>) response.body()).size());
-                new ItemTouchHelper(new SwipeToDeleteCallback(this) {
+                new ItemTouchHelper(new SwipeToDeleteCallback(this,false) {
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                         final int position = viewHolder.getAdapterPosition();

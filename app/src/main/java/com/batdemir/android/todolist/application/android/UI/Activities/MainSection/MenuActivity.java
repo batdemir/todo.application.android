@@ -1,13 +1,11 @@
 package com.batdemir.android.todolist.application.android.UI.Activities.MainSection;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 
 import com.batdemir.android.todolist.application.android.Entity.UIModels.EventsItemModel;
 import com.batdemir.android.todolist.application.android.R;
@@ -15,14 +13,14 @@ import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
 import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.TaskDefinationActivity;
 import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.TodoListDefinationActivity;
-import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterFragmentPager;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewEvents;
-import com.batdemir.android.todolist.application.android.UI.Fragments.EventsFragment;
-import com.batdemir.android.todolist.application.android.UI.Fragments.TodoListFragment;
 import com.batdemir.android.todolist.application.android.databinding.ActivityMenuBinding;
 
-public class MenuActivity extends BaseActivity implements
-        AdapterRecyclerViewEvents.EventsItemListener {
+import java.util.ArrayList;
+import java.util.UUID;
+
+
+public class MenuActivity extends BaseActivity implements AdapterRecyclerViewEvents.EventsItemListener {
 
     private Context context;
     private ActivityMenuBinding binding;
@@ -42,34 +40,31 @@ public class MenuActivity extends BaseActivity implements
 
     @Override
     public void loadData() {
-
+        AdapterRecyclerViewEvents adapterRecyclerViewEvents = new AdapterRecyclerViewEvents(context,getModels());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false);
+        binding.recyclerViewEvents.setAdapter(adapterRecyclerViewEvents);
+        binding.recyclerViewEvents.setLayoutManager(gridLayoutManager);
+        binding.recyclerViewEvents.setItemViewCacheSize(getModels().size());
     }
 
     @Override
     public void setListeners() {
-        set_tabLayout();
     }
 
     //----functions----//
 
-    private void set_tabLayout(){
-        setupViewPager(binding.viewPager);
-        binding.tabLayout.setupWithViewPager(binding.viewPager);
-        binding.tabLayout.setBackgroundColor(getColor(R.color.primaryLightColor));
-        binding.tabLayout.setTabTextColors(getColor(R.color.white),getColor(R.color.white));
-    }
-
-    private void setupViewPager(ViewPager viewPager){
-        AdapterFragmentPager adapterFragmentPager = new AdapterFragmentPager(getSupportFragmentManager());
-        adapterFragmentPager.addFragment(new EventsFragment(),"Events");
-        adapterFragmentPager.addFragment(new TodoListFragment(), "Todo Lists");
-        adapterFragmentPager.notifyDataSetChanged();
-        viewPager.setAdapter(adapterFragmentPager);
-        viewPager.setOffscreenPageLimit(2);
-    }
-
     @Override
     public void onItemClick(EventsItemModel eventsItemModel) {
         new Tool(context).move(eventsItemModel.getTo(),true,true);
+    }
+
+    private ArrayList<EventsItemModel> getModels(){
+        ArrayList<EventsItemModel> models = new ArrayList<>();
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Task Defination", TaskDefinationActivity.class,context.getDrawable(R.drawable.ic_task_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Todo List Defination", TodoListDefinationActivity.class,context.getDrawable(R.drawable.ic_todo_list_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(), "Todo Lists", TodoListActivity.class,context.getDrawable(R.drawable.ic_todolist_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Settings", SettingsActivity.class,context.getDrawable(R.drawable.ic_settings_gears_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Exit", ExitActivity.class,context.getDrawable(R.drawable.ic_exit_mini)));
+        return models;
     }
 }

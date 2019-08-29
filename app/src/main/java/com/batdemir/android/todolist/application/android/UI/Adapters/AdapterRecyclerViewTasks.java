@@ -81,5 +81,4 @@ public class AdapterRecyclerViewTasks extends RecyclerView.Adapter {
     public interface TasksItemListener{
         void onItemClick(TaskModel taskModel);
     }
-
 }

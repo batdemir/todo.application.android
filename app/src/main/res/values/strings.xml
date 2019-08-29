@@ -23,6 +23,12 @@
     <string name="todo_list_name">Todo List Name</string>
     <string name="selected_tasks">Selected Tasks</string>
     <string name="selectable_tasks">Selectable Tasks</string>
+    <string name="task">Task</string>
+    <string name="priority">Priority</string>
+    <string name="deadline">DeadLine</string>
+    <string name="status">Status</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 
 
     <string-array name="status_list">
