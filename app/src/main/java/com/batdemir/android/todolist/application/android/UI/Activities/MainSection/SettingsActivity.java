@@ -40,7 +40,7 @@ public class SettingsActivity extends BaseActivity implements UserService.UserSe
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(true,"Menu");
+        init_toolbar(true,getString(R.string.menu));
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_settings);
     }
@@ -87,17 +87,17 @@ public class SettingsActivity extends BaseActivity implements UserService.UserSe
     private boolean controlInputs(){
         String message = "";
         message += binding.editTextFirstName.getError()!=null || binding.editTextFirstName.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputFirstName.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputFirstName.getHint() + "!\n":"";
         message += binding.editTextSurName.getError()!=null || binding.editTextSurName.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputSurName.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputSurName.getHint() + "!\n":"";
         message += binding.editTextUserName.getError()!=null || binding.editTextUserName.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputUserName.getHint() + " !\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputUserName.getHint() + " !\n":"";
         message += binding.editTextUserPassword.getError()!=null || binding.editTextUserPassword.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputUserPassword.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputUserPassword.getHint() + "!\n":"";
         message += binding.editTextConfirmUserPassword.getError()!=null || binding.editTextConfirmUserPassword.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputConfirmUserPassword.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputConfirmUserPassword.getHint() + "!\n":"";
         message += binding.editTextEmail.getError()!=null || binding.editTextEmail.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputEmail.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputEmail.getHint() + "!\n":"";
 
         if(message.isEmpty())
             return true;

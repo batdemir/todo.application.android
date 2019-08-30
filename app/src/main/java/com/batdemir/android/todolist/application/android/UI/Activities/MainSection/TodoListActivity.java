@@ -15,6 +15,7 @@ import com.batdemir.android.todolist.application.android.API.Services.TodoListSe
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoModel;
 import com.batdemir.android.todolist.application.android.GlobalVar.GlobalVariable;
 import com.batdemir.android.todolist.application.android.R;
+import com.batdemir.android.todolist.application.android.Tools.ToolPdf;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewTodoList;
 import com.batdemir.android.todolist.application.android.databinding.ActivityTodoListBinding;
@@ -46,8 +47,11 @@ public class TodoListActivity extends BaseActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menuItemExport:
+            case R.id.sendViaEmail:
+                new ToolPdf(context,true).createPdf(binding.cardView,binding.recyclerViewTodoList);
                 return true;
+            case R.id.saveLocale:
+                new ToolPdf(context,false).createPdf(binding.cardView,binding.recyclerViewTodoList);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -55,7 +59,7 @@ public class TodoListActivity extends BaseActivity implements
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(true,"Menu");
+        init_toolbar(true,getString(R.string.menu));
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_todo_list);
     }

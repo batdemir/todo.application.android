@@ -3,6 +3,7 @@ package com.batdemir.android.todolist.application.android.Tools;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -54,6 +55,15 @@ public class Tool {
             linearProps.startAnimation(animation);
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
+        }
+    }
+
+    public String getPath(){
+        String[] directories = ToolStorage.getSDCardDirectory(context);
+        if(directories.length>0){
+            return directories[0]+"Android/data/"+context.getPackageName();
+        }else {
+            return Environment.getExternalStorageDirectory().getAbsolutePath();
         }
     }
 

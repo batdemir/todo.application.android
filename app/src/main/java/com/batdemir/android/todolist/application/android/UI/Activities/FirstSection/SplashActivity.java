@@ -73,7 +73,7 @@ public class SplashActivity extends AppCompatActivity implements
                             ||!shouldShowRequestPermissionRationale(permissions[4])
                             ||!shouldShowRequestPermissionRationale(permissions[5])){
                         ToolAlertDialog
-                                .newInstance("Please activate the permissions in the section \"Applications>"+getString(R.string.app_name)+">Settings\"",false,false)
+                                .newInstance(getString(R.string.please_active_permission)+getString(R.string.app_name)+getString(R.string.please_active_permission_continue),false,false)
                                 .show(getSupportFragmentManager(),SplashActivity.class.getSimpleName());
                     }else{
                         try {

@@ -45,7 +45,7 @@ public class TaskDefinationActivity extends BaseActivity implements
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(true,"Task Defination");
+        init_toolbar(true,getString(R.string.task_defination));
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_task_defination);
     }
@@ -63,8 +63,8 @@ public class TaskDefinationActivity extends BaseActivity implements
                 clickFloatButton();
             }
         });
-        new ToolTimeExpressions(context).showDatePicker(binding.contraintDeadCalender, binding.txtEditDeadLineCalender,"Please Select Date","Yes","No");
-        new ToolTimeExpressions(context).showTimePicker(binding.contraintDeadLineClock, binding.txtEditDeadLineClock, "Please Select Time","Yes", "No");
+        new ToolTimeExpressions(context).showDatePicker(binding.contraintDeadCalender, binding.txtEditDeadLineCalender,getString(R.string.please_select_date),getString(R.string.yes),getString(R.string.no));
+        new ToolTimeExpressions(context).showTimePicker(binding.contraintDeadLineClock, binding.txtEditDeadLineClock, getString(R.string.please_select_time),getString(R.string.yes), getString(R.string.no));
     }
 
     //----functions----//
@@ -72,11 +72,11 @@ public class TaskDefinationActivity extends BaseActivity implements
     private boolean controlInputs(){
         String message = "";
         message += binding.editTextName.getError()!=null || binding.editTextName.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputName.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly) + binding.textInputName.getHint() + "!\n":"";
         message += binding.txtEditDeadLineCalender.getText().toString().isEmpty()
-                ?"Please Select Date !\n":"";
+                ?getString(R.string.please_select_date)+"\n":"";
         message += binding.txtEditDeadLineClock.getText().toString().isEmpty()
-                ?"Please Select Time !\n":"";
+                ?getString(R.string.please_select_time)+"\n":"";
 
         if(message.isEmpty())
             return true;

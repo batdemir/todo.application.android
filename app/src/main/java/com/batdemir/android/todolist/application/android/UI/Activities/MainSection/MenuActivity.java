@@ -33,7 +33,7 @@ public class MenuActivity extends BaseActivity implements AdapterRecyclerViewEve
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(false,"Menu");
+        init_toolbar(false,getString(R.string.menu));
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_menu);
     }
@@ -60,11 +60,11 @@ public class MenuActivity extends BaseActivity implements AdapterRecyclerViewEve
 
     private ArrayList<EventsItemModel> getModels(){
         ArrayList<EventsItemModel> models = new ArrayList<>();
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Task Defination", TaskDefinationActivity.class,context.getDrawable(R.drawable.ic_task_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Todo List Defination", TodoListDefinationActivity.class,context.getDrawable(R.drawable.ic_todo_list_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(), "Todo Lists", TodoListActivity.class,context.getDrawable(R.drawable.ic_todolist_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Settings", SettingsActivity.class,context.getDrawable(R.drawable.ic_settings_gears_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),"Exit", ExitActivity.class,context.getDrawable(R.drawable.ic_exit_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.task_defination), TaskDefinationActivity.class,context.getDrawable(R.drawable.ic_task_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.todolist_defination), TodoListDefinationActivity.class,context.getDrawable(R.drawable.ic_todo_list_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.todolists), TodoListActivity.class,context.getDrawable(R.drawable.ic_todolist_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.settings), SettingsActivity.class,context.getDrawable(R.drawable.ic_settings_gears_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.exit), ExitActivity.class,context.getDrawable(R.drawable.ic_exit_mini)));
         return models;
     }
 }

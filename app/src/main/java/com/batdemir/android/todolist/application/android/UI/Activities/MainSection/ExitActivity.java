@@ -24,7 +24,7 @@ public class ExitActivity extends BaseActivity {
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(true,"Menu");
+        init_toolbar(true,getString(R.string.menu));
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_exit);
     }

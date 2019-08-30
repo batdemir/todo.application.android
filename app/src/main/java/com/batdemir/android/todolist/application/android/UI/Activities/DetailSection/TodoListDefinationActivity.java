@@ -53,7 +53,7 @@ public class TodoListDefinationActivity extends BaseActivity implements
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(true,"TodoList Defination");
+        init_toolbar(true,getString(R.string.todolist_defination));
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_todo_list_defination);
         taskModels = new ArrayList<>();
@@ -79,9 +79,9 @@ public class TodoListDefinationActivity extends BaseActivity implements
     private boolean controlInputs(){
         String message = "";
         message += binding.editTextName.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputName.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly) + binding.textInputName.getHint() + "!\n":"";
         message += taskModels.size()==0
-                ?"Please Select Some Tasks In Selectable View !\n":"";
+                ?getString(R.string.please_select_some_tasks_in_selectable_view):"";
 
         if(message.isEmpty())
             return true;
@@ -107,7 +107,7 @@ public class TodoListDefinationActivity extends BaseActivity implements
                 binding.editTextName.getText().toString(),
                 GlobalVariable.userModel.getUserName(),
                 taskModel.getName(),
-                "Created",
+                getString(R.string.created),
                 Boolean.TRUE,
                 new ToolTimeExpressions().setDateToString(Calendar.getInstance().getTime(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT)
         );

@@ -75,9 +75,9 @@ public class SignInActivity extends AppCompatActivity implements
     private boolean controlInputs(){
         String message = "";
         message += binding.editTextUserName.getError()!=null || binding.editTextUserName.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputUserName.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputUserName.getHint() + "!\n":"";
         message += binding.editTextUserPassword.getError()!=null || binding.editTextUserPassword.getText().toString().isEmpty()
-                ?"Please Enter Correctly " + binding.textInputUserPassword.getHint() + "!\n":"";
+                ?getString(R.string.please_enter_correctly)+ binding.textInputUserPassword.getHint() + "!\n":"";
 
         if(message.isEmpty())
             return true;
