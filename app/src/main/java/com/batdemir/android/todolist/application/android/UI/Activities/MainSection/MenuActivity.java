@@ -64,7 +64,7 @@ public class MenuActivity extends BaseActivity implements AdapterRecyclerViewEve
         models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.todolist_defination), TodoListDefinationActivity.class,context.getDrawable(R.drawable.ic_todo_list_mini)));
         models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.todolists), TodoListActivity.class,context.getDrawable(R.drawable.ic_todolist_mini)));
         models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.settings), SettingsActivity.class,context.getDrawable(R.drawable.ic_settings_gears_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.exit), ExitActivity.class,context.getDrawable(R.drawable.ic_exit_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.logout), LogoutActivity.class,context.getDrawable(R.drawable.ic_exit_mini)));
         return models;
     }
 }

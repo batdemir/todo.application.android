@@ -23,6 +23,7 @@ public class CustomService<T> implements
     private boolean connectionAvailable = false;
 
     public enum OperationType{
+        Exception,
         Get;
 
         OperationType() {
@@ -91,20 +92,20 @@ public class CustomService<T> implements
                     ToolAlertDialog
                             .newInstance(response.errorBody().string(), false, false)
                             .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
-                    customServiceListener.onFailure();
+                    customServiceListener.onFailure(operationType);
                 }
             } catch (Exception e) {
                 ToolAlertDialog
                         .newInstance("Could not contact the service.\nPlease Try Again.", false, false)
                         .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
-                customServiceListener.onFailure();
+                customServiceListener.onFailure(OperationType.Exception);
             }
         }
     }
 
     public interface CustomServiceListener<T> {
         void onSuccess(OperationType operationType, Response<T> response);
-        void onFailure();
+        void onFailure(OperationType operationType);
     }
 
     @Override

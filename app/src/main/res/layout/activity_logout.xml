@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:id="@+id/rootExit"
+        android:id="@+id/rootLogout"
         android:orientation="vertical"
         style="@style/style_other_root">
 
         <TextView
-            android:id="@+id/txtExit"
+            android:id="@+id/txtLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Exit"
+            android:text="@string/logout"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:textAlignment="center"

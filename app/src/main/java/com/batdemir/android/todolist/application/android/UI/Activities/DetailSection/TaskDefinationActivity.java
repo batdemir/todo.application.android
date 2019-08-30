@@ -155,7 +155,7 @@ public class TaskDefinationActivity extends BaseActivity implements
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(TaskService.OperationType operationType) {
 
     }
 

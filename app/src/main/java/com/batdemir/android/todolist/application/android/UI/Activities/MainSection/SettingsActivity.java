@@ -141,7 +141,7 @@ public class SettingsActivity extends BaseActivity implements UserService.UserSe
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(UserService.OperationType operationType) {
 
     }
 }

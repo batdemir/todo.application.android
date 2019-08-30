@@ -51,6 +51,15 @@
     <string name="todolists">Todo Lists</string>
     <string name="settings">Settings</string>
     <string name="exit">Exit</string>
+    <string name="logout">Logout</string>
+    <string name="dead_line">Deadline:</string>
+    <string name="created_date">Created Date:</string>
+    <string name="was_removed_from_the_list">was removed from the list.</string>
+    <string name="undo">UNDO</string>
+    <string name="completed">Completed</string>
+    <string name="was_completed_from_the_list">was completed from the list.</string>
+    <string name="events">Events</string>
+    <string name="todo_lists">Todo Lists</string>
 
 
     <string-array name="status_list">

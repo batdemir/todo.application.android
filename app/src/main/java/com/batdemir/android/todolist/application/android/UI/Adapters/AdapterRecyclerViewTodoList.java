@@ -47,7 +47,7 @@ public class AdapterRecyclerViewTodoList extends RecyclerView.Adapter {
             this.itemModel = itemModel;
 
             binding.txtEditTodoListName.setText(itemModel.getTodoName());
-            binding.txtEditTodoListCreatedDate.setText("Created Date: "+new ToolTimeExpressions().setDateFormat(itemModel.getTodoCreatedDate(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SHOW_FULL_FORMAT));
+            binding.txtEditTodoListCreatedDate.setText(context.getString(R.string.created_date)+new ToolTimeExpressions().setDateFormat(itemModel.getTodoCreatedDate(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SHOW_FULL_FORMAT));
 
             AdapterRecyclerViewTodoListTasks adapterRecyclerViewTodoListTasks = new AdapterRecyclerViewTodoListTasks(context,itemModel.getCustomTodoTasksModels());
             binding.recyclerViewTodoListTasks.setAdapter(adapterRecyclerViewTodoListTasks);
@@ -68,8 +68,8 @@ public class AdapterRecyclerViewTodoList extends RecyclerView.Adapter {
                             item.getCreatedDate()
                     );
                     new TodoListService<>(context).Delete(todoListModel);
-                    Snackbar snackbar = Snackbar.make(binding.rootRecyclerViewItemTodoList, item.getTaskName()+" was removed from the list.", Snackbar.LENGTH_LONG);
-                    snackbar.setAction("UNDO", new View.OnClickListener() {
+                    Snackbar snackbar = Snackbar.make(binding.rootRecyclerViewItemTodoList, item.getTaskName()+context.getString(R.string.was_removed_from_the_list), Snackbar.LENGTH_LONG);
+                    snackbar.setAction(context.getString(R.string.undo), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             new TodoListService<>(context).Insert(todoListModel);
@@ -89,16 +89,16 @@ public class AdapterRecyclerViewTodoList extends RecyclerView.Adapter {
                             item.getTodoName(),
                             item.getUserName(),
                             item.getTaskName(),
-                            "Completed",
+                            context.getString(R.string.completed),
                             item.getActive(),
                             item.getCreatedDate()
                     );
                     new TodoListService<>(context).Update(todoListModel);
-                    Snackbar snackbar = Snackbar.make(binding.rootRecyclerViewItemTodoList, item.getTaskName()+" was completed from the list.", Snackbar.LENGTH_LONG);
-                    snackbar.setAction("UNDO", new View.OnClickListener() {
+                    Snackbar snackbar = Snackbar.make(binding.rootRecyclerViewItemTodoList, item.getTaskName()+context.getString(R.string.was_completed_from_the_list), Snackbar.LENGTH_LONG);
+                    snackbar.setAction(context.getString(R.string.undo), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            todoListModel.setStatusName("Created");
+                            todoListModel.setStatusName(context.getString(R.string.created));
                             new TodoListService<>(context).Update(todoListModel);
                         }
                     });

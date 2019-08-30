@@ -22,6 +22,7 @@ import com.batdemir.android.todolist.application.android.GlobalVar.GlobalVariabl
 import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.RecyclerViewTools.SwipeToDeleteCallback;
+import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.Tools.ToolTimeExpressions;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewSelectTasks;
@@ -152,9 +153,24 @@ public class TodoListDefinationActivity extends BaseActivity implements
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(TaskService.OperationType operationType) {
+        switch (operationType){
+            case GetTasksByUser:
+                new Tool(context).move(TaskDefinationActivity.class,true,false);
+                break;
+        }
+    }
+
+    @Override
+    public void onFailure(TodoService.OperationType operationType) {
 
     }
+
+    @Override
+    public void onFailure(TodoListService.OperationType operationType) {
+
+    }
+
 
     @Override
     public void onItemCheckedChanged(boolean isChecked, TaskModel taskModel) {

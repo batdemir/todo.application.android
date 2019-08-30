@@ -24,6 +24,7 @@ public class TodoService<T> implements
     private boolean connectionAvailable = false;
 
     public enum OperationType{
+        Exception,
         Insert,
         Update,
         Delete;
@@ -108,20 +109,20 @@ public class TodoService<T> implements
                     ToolAlertDialog
                             .newInstance(response.errorBody().string(), false, false)
                             .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
-                    taskServiceListener.onFailure();
+                    taskServiceListener.onFailure(operationType);
                 }
             } catch (Exception e) {
                 ToolAlertDialog
                         .newInstance("Could not contact the service.\nPlease Try Again.", false, false)
                         .show(((FragmentActivity) context).getSupportFragmentManager(), UserService.class.getSimpleName());
-                taskServiceListener.onFailure();
+                taskServiceListener.onFailure(OperationType.Exception);
             }
         }
     }
 
     public interface TaskServiceListener<T> {
         void onSuccess(OperationType operationType, Response<T> response);
-        void onFailure();
+        void onFailure(OperationType operationType);
     }
 
     @Override

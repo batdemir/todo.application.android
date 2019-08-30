@@ -7,7 +7,8 @@ import android.preference.PreferenceManager;
 public class ToolSharedPreferences {
 
     public enum Keys{
-        BASE_URL("http://alsancak.org/api/");
+        BASE_URL("http://alsancak.org/api/"),
+        rememberMe("");
 
         private String defValue;
 

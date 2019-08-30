@@ -25,7 +25,7 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/theme_actionBar" />
         <activity
-            android:name=".UI.Activities.MainSection.ExitActivity"
+            android:name=".UI.Activities.MainSection.LogoutActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/theme_actionBar" />
         <activity

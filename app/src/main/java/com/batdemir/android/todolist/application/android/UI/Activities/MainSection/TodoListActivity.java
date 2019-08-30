@@ -15,8 +15,10 @@ import com.batdemir.android.todolist.application.android.API.Services.TodoListSe
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoModel;
 import com.batdemir.android.todolist.application.android.GlobalVar.GlobalVariable;
 import com.batdemir.android.todolist.application.android.R;
+import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.Tools.ToolPdf;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
+import com.batdemir.android.todolist.application.android.UI.Activities.DetailSection.TodoListDefinationActivity;
 import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecyclerViewTodoList;
 import com.batdemir.android.todolist.application.android.databinding.ActivityTodoListBinding;
 
@@ -103,7 +105,16 @@ public class TodoListActivity extends BaseActivity implements
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(CustomService.OperationType operationType) {
+        switch (operationType){
+            case Get:
+                new Tool(context).move(TodoListDefinationActivity.class,true,false);
+                break;
+        }
+    }
+
+    @Override
+    public void onFailure(TodoListService.OperationType operationType) {
 
     }
 

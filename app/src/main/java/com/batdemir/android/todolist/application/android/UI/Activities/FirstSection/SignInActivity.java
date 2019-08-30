@@ -16,6 +16,7 @@ import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.
 import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTouchEvent;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.CharCountValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
+import com.batdemir.android.todolist.application.android.Tools.ToolSharedPreferences;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActions;
 import com.batdemir.android.todolist.application.android.UI.Activities.MainSection.MenuActivity;
 import com.batdemir.android.todolist.application.android.databinding.ActivitySignInBinding;
@@ -54,6 +55,14 @@ public class SignInActivity extends AppCompatActivity implements
 
     @Override
     public void loadData() {
+        if(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.rememberMe).isEmpty()){
+            binding.editTextUserName.setText("");
+            binding.checkBoxRememberMe.setChecked(false);
+        }else {
+            binding.editTextUserName.setText(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.rememberMe));
+            binding.checkBoxRememberMe.setChecked(true);
+            binding.editTextUserPassword.requestFocus();
+        }
     }
 
     @Override
@@ -64,8 +73,11 @@ public class SignInActivity extends AppCompatActivity implements
         binding.btnSignUp.setOnTouchListener(new OnTouchEvent(binding.btnSignUp));
 
         binding.btnLogin.setOnClickListener(v -> {
-            if(controlInputs())
+            if(controlInputs()){
+                if(binding.checkBoxRememberMe.isChecked())
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.rememberMe,binding.editTextUserName.getText().toString());
                 new UserService<>(context).Login(binding.editTextUserName.getText().toString(), binding.editTextUserPassword.getText().toString());
+            }
         });
         binding.btnSignUp.setOnClickListener(v -> new Tool(context).move(SignUpActivity.class,false,false));
     }
@@ -98,7 +110,7 @@ public class SignInActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(UserService.OperationType operationType) {
 
     }
 

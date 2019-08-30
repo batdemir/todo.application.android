@@ -12,7 +12,7 @@
             android:id="@+id/txtTodoLists"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Todo Lists"
+            android:text="@string/todo_lists"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:textAlignment="center"

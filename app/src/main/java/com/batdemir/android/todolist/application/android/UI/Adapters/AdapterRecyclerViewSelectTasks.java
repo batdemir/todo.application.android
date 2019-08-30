@@ -42,7 +42,7 @@ public class AdapterRecyclerViewSelectTasks extends RecyclerView.Adapter {
         public void setData(TaskModel itemModel){
             this.itemModel = itemModel;
 
-            String str = "\t" + itemModel.getName() + "\n\tDeadline: " + new ToolTimeExpressions().setDateFormat(itemModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT,GlobalVariable.DateFormat.SHOW_FULL_FORMAT);
+            String str = "\t" + itemModel.getName() +"\n\t" +context.getString(R.string.dead_line) + new ToolTimeExpressions().setDateFormat(itemModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT,GlobalVariable.DateFormat.SHOW_FULL_FORMAT);
 
             binding.checkBoxTask.setText(str);
         }
