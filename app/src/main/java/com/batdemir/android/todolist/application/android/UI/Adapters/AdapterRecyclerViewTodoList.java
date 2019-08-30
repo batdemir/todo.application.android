@@ -1,6 +1,5 @@
 package com.batdemir.android.todolist.application.android.UI.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.batdemir.android.todolist.application.android.API.Services.TaskService;
 import com.batdemir.android.todolist.application.android.API.Services.TodoListService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoModel;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoTasksModel;

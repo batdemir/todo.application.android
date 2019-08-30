@@ -1,5 +1,7 @@
 package com.batdemir.android.todolist.application.android;
 
+import com.batdemir.android.todolist.application.android.Tools.EditTextTools.ToolEditText;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

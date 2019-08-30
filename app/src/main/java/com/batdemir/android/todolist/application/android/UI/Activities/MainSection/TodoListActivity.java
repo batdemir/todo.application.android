@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.batdemir.android.todolist.application.android.API.Services.CustomService;
 import com.batdemir.android.todolist.application.android.API.Services.TodoListService;
@@ -31,6 +34,23 @@ public class TodoListActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init(false);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuItemExport:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -82,6 +102,5 @@ public class TodoListActivity extends BaseActivity implements
     public void onFailure() {
 
     }
-
 
 }

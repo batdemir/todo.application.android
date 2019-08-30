@@ -1,5 +1,7 @@
 package com.batdemir.android.todolist.application.android.Entity.ServiceModels;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -33,7 +35,7 @@ public class TaskModel implements Serializable {
     public TaskModel() {
     }
 
-    public TaskModel(String id, String name, String description, String deadLine, String priorityName, String userName, Boolean active, String createdDate) {
+    public TaskModel(@NonNull String id, String name, String description, String deadLine, String priorityName, String userName, Boolean active, String createdDate) {
         Id = id;
         Name = name;
         Description = description;
