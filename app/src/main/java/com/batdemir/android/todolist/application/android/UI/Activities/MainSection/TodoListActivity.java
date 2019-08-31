@@ -3,12 +3,16 @@ package com.batdemir.android.todolist.application.android.UI.Activities.MainSect
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.batdemir.android.todolist.application.android.API.Services.CustomService;
 import com.batdemir.android.todolist.application.android.API.Services.TodoListService;
@@ -23,6 +27,8 @@ import com.batdemir.android.todolist.application.android.UI.Adapters.AdapterRecy
 import com.batdemir.android.todolist.application.android.databinding.ActivityTodoListBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Response;
 
@@ -46,14 +52,37 @@ public class TodoListActivity extends BaseActivity implements
         return true;
     }
 
+    @SuppressLint("NewApi")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            case R.id.menuItemOrder:
+                AdapterRecyclerViewTodoList adapterRecyclerViewTodoList = (AdapterRecyclerViewTodoList) binding.recyclerViewTodoList.getAdapter();
+                ArrayList<CustomTodoModel> customTodoModels = adapterRecyclerViewTodoList.getModels();
+                item.setChecked(!item.isChecked());
+                if(item.isChecked()){
+                    Collections.sort(customTodoModels, new Comparator<CustomTodoModel>() {
+                        @Override
+                        public int compare(CustomTodoModel o1, CustomTodoModel o2) {
+                            return o1.getTodoName().compareTo(o2.getTodoName());
+                        }
+                    });
+                }else {
+                    Collections.sort(customTodoModels, new Comparator<CustomTodoModel>() {
+                        @Override
+                        public int compare(CustomTodoModel o1, CustomTodoModel o2) {
+                            return o1.getTodoCreatedDate().compareTo(o2.getTodoCreatedDate());
+                        }
+                    });
+                }
+                binding.recyclerViewTodoList.setAdapter(new AdapterRecyclerViewTodoList(context,customTodoModels));
+                return true;
             case R.id.sendViaEmail:
                 new ToolPdf(context,true).createPdf(binding.cardView,binding.recyclerViewTodoList);
                 return true;
             case R.id.saveLocale:
                 new ToolPdf(context,false).createPdf(binding.cardView,binding.recyclerViewTodoList);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -72,9 +101,7 @@ public class TodoListActivity extends BaseActivity implements
     }
 
     @Override
-    public void setListeners() {
-
-    }
+    public void setListeners() {}
 
     //----functions----//
 

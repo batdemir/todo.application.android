@@ -55,13 +55,17 @@ public class SignInActivity extends AppCompatActivity implements
 
     @Override
     public void loadData() {
-        if(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.rememberMe).isEmpty()){
+        String userName = new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userName);
+        String userPassword = new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userPassword);
+        if(userName.isEmpty() && userPassword.isEmpty()){
             binding.editTextUserName.setText("");
+            binding.editTextUserPassword.setText("");
             binding.checkBoxRememberMe.setChecked(false);
         }else {
-            binding.editTextUserName.setText(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.rememberMe));
+            binding.editTextUserName.setText(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userName));
+            binding.editTextUserPassword.setText(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userPassword));
             binding.checkBoxRememberMe.setChecked(true);
-            binding.editTextUserPassword.requestFocus();
+            new UserService<>(context).Login(binding.editTextUserName.getText().toString(), binding.editTextUserPassword.getText().toString());
         }
     }
 
@@ -74,8 +78,10 @@ public class SignInActivity extends AppCompatActivity implements
 
         binding.btnLogin.setOnClickListener(v -> {
             if(controlInputs()){
-                if(binding.checkBoxRememberMe.isChecked())
-                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.rememberMe,binding.editTextUserName.getText().toString());
+                if(binding.checkBoxRememberMe.isChecked()){
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userName,binding.editTextUserName.getText().toString());
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userPassword,binding.editTextUserPassword.getText().toString());
+                }
                 new UserService<>(context).Login(binding.editTextUserName.getText().toString(), binding.editTextUserPassword.getText().toString());
             }
         });

@@ -32,6 +32,12 @@ public class MenuActivity extends BaseActivity implements AdapterRecyclerViewEve
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        loadData();
+    }
+
+    @Override
     public void getObjectReferences() {
         init_toolbar(false,getString(R.string.menu));
         context = this;

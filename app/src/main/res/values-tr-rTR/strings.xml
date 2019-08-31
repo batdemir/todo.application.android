@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">To-Do List</string>
+    <string name="cancel">İptal</string>
+    <string name="completed">Tamamlandı</string>
+    <string name="created">Oluşturuldu</string>
+    <string name="created_date">Oluşturulma Zamanı:</string>
+    <string name="dead_line">Bitiş:</string>
+    <string name="deadline">Bitiş</string>
+    <string name="deadline_calender">Bitiş Tarihi</string>
+    <string name="deadline_clock">Bitiş Saati</string>
+    <string name="delete">Sil</string>
+    <string name="email">Email</string>
+    <string name="events">Aksiyonlar</string>
+    <string name="exit">Çıkış</string>
+    <string name="exit_application">Uygulamadan Çıkmak İstiyor Musunuz?</string>
+    <string name="first_name">İsim</string>
+    <string name="forgot_password">Şifremi Unuttum</string>
+    <string name="export">Dışa Aktar</string>
+    <string name="login">Giriş</string>
+    <string name="logout">Çıkış</string>
+    <string name="menu">Menu</string>
+    <string name="no">Hayır</string>
+    <string name="notes">Notlar</string>
+    <string name="open_file">Dosya Aç</string>
+    <string name="password">Şifre</string>
+    <string name="pdf_created">PDF Oluşturuldu</string>
+    <string name="please_enter_correctly">Lütfen, Giriniz</string>
+    <string name="please_select_date">Lütfen, Tarih Seçiniz</string>
+    <string name="please_select_some_tasks_in_selectable_view">Lütfen, Seçim Ekranından Görev Seçiniz !</string>
+    <string name="please_select_time">Lütfen, Saat Seçiniz</string>
+    <string name="priority">Öncelik</string>
+    <string name="remember_me">Beni Hatırla</string>
+    <string name="save_locale">Yerele Kaydet</string>
+    <string name="selectable_tasks">Seçilebilir Görevler</string>
+    <string name="selected_tasks">Seçilen Görevler</string>
+    <string name="send_file">Dosya Gönder</string>
+    <string name="send_via_email">Email ile Dosya Gönder</string>
+    <string name="settings">Ayarlar</string>
+    <string name="sign_up">Kayıt Ol</string>
+    <string name="status">Durum</string>
+    <string name="sur_name">Soyisim</string>
+    <string name="task">Görev</string>
+    <string name="task_defination">Görev Tanımlama</string>
+    <string name="task_name">Görev İsmi</string>
+    <string name="todo">TODO</string>
+    <string name="todo_list_name">Yapılacak Listesi İsmi</string>
+    <string name="todo_lists">Yapılacaklar Listesi</string>
+    <string name="todolist_defination">Yapılacaklar Listesi Tanımlama</string>
+    <string name="todolists">Yapılacaklar Listesi</string>
+    <string name="undo">GERİ AL</string>
+    <string name="update">Güncelle</string>
+    <string name="user_name">Kullanıcı Adı</string>
+    <string name="was_completed_from_the_list">listeden tamamlandı.</string>
+    <string name="was_removed_from_the_list">listeden silindi.</string>
+    <string name="yes">Evet</string>
+    <string name="you_have_successfully_registered_please_login">Başarıyla Kayıt Oludunuz. Lütfen Giriş Yapın.</string>
+    <string name="please_active_permission"><![CDATA[Lütfen, İzinleri Onaylayın \"Uygulamalar>]]></string>
+    <string name="please_active_permission_continue"><![CDATA[>Ayarlar\]]></string>
+    <string name="okey">Tamam</string>
+    <string name="already_have_an_account_sign_in">Zaten bir hesabın var mı? Giriş Yap.</string>
+    <string name="confirm_password">Tekrar Şifre</string>
+
+    <string-array name="status_list">
+        <item>Oluşturuldu</item>
+        <item>Devam Etmekte</item>
+        <item>Tamamlandı</item>
+    </string-array>
+
+    <string-array name="priority_list">
+        <item>Normal</item>
+        <item>Yüksek</item>
+        <item>Düşük</item>
+    </string-array>
+
+    <string-array name="language_list">
+        <item>İngilizce</item>
+        <item>Türkçe</item>
+    </string-array>
+</resources>

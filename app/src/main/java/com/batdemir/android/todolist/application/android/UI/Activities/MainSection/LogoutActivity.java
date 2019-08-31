@@ -36,7 +36,8 @@ public class LogoutActivity extends BaseActivity {
 
     @Override
     public void loadData() {
-        new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.rememberMe,"");
+        new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userName,"");
+        new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userPassword,"");
         new Tool(context).move(SplashActivity.class,true,false);
     }
 

@@ -8,7 +8,10 @@ public class ToolSharedPreferences {
 
     public enum Keys{
         BASE_URL("http://alsancak.org/api/"),
-        rememberMe("");
+        userName(""),
+        userPassword(""),
+        language("en"),
+        country("US");
 
         private String defValue;
 

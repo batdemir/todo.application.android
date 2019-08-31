@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menuItemOrder"
+        android:icon="@drawable/ic_order_mini"
+        app:showAsAction="always"
+        android:title="Order" />
+
+
+    <item
         android:id="@+id/menuItemExport"
         android:icon="@drawable/ic_export_mini"
         app:showAsAction="always"

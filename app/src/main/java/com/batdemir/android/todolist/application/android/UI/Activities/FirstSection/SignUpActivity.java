@@ -63,8 +63,8 @@ public class SignUpActivity extends AppCompatActivity implements
 
     @Override
     public void setListeners() {
-        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextFirstName));
-        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextSurName));
+        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(3,binding.editTextFirstName));
+        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(3,binding.editTextSurName));
         binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserName));
         binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserPassword));
         binding.editTextConfirmUserPassword.addTextChangedListener(new ConfirmPasswordValidWatcher(binding.editTextUserPassword,binding.editTextConfirmUserPassword));

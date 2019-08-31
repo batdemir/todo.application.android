@@ -3,6 +3,8 @@ package com.batdemir.android.todolist.application.android.UI.Adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -16,15 +18,17 @@ import com.batdemir.android.todolist.application.android.databinding.RecyclerVie
 
 import java.util.ArrayList;
 
-public class AdapterRecyclerViewTodoListTasks extends RecyclerView.Adapter {
+public class AdapterRecyclerViewTodoListTasks extends RecyclerView.Adapter implements Filterable {
 
     private Context context;
     private ArrayList<CustomTodoTasksModel> models;
+    private ArrayList<CustomTodoTasksModel> filteredModels;
     private RecyclerViewItemTodolistTasksBinding binding;
 
     public AdapterRecyclerViewTodoListTasks(Context context, ArrayList<CustomTodoTasksModel> models) {
         this.context = context;
         this.models = models;
+        this.filteredModels = models;
     }
 
     public class TasksViewHolder extends RecyclerView.ViewHolder {
@@ -55,15 +59,63 @@ public class AdapterRecyclerViewTodoListTasks extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         TasksViewHolder viewHolder = (TasksViewHolder) holder;
-        viewHolder.setData(models.get(position));
+        viewHolder.setData(filteredModels.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return models.size();
+        return filteredModels.size();
     }
 
     public ArrayList<CustomTodoTasksModel> getModels() {
-        return models;
+        return filteredModels;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+
+                if(constraint == null || constraint.length() == 0) {
+                    results.values = models;
+                    results.count = models.size();
+                }
+                else {
+                    ArrayList<CustomTodoTasksModel> filterResultsData = new ArrayList<>();
+                    for(CustomTodoTasksModel data: models){
+                        if(data.getTaskName().toString().contains(constraint)){
+                            filterResultsData.add(data);
+                        }
+                    }
+                    for(CustomTodoTasksModel data: models){
+                        if(data.getDeadLine().toString().contains(constraint)){
+                            filterResultsData.add(data);
+                        }
+                    }
+                    for(CustomTodoTasksModel data: models){
+                        if(data.getPriorityName().toString().contains(constraint)){
+                            filterResultsData.add(data);
+                        }
+                    }
+                    for(CustomTodoTasksModel data: models){
+                        if(data.getStatusName().toString().contains(constraint)){
+                            filterResultsData.add(data);
+                        }
+                    }
+                    results.values = filterResultsData;
+                    results.count = filterResultsData.size();
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredModels = (ArrayList<CustomTodoTasksModel>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

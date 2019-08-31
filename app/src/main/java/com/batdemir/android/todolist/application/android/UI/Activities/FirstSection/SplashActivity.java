@@ -3,7 +3,9 @@ package com.batdemir.android.todolist.application.android.UI.Activities.FirstSec
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -19,6 +21,8 @@ import com.batdemir.android.todolist.application.android.R;
 import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
 import com.batdemir.android.todolist.application.android.Tools.Tool;
 import com.batdemir.android.todolist.application.android.Tools.ToolSharedPreferences;
+
+import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity implements
         ToolAlertDialog.AlertClickListener {
@@ -117,14 +121,22 @@ public class SplashActivity extends AppCompatActivity implements
         Log.d("BASE_URL=>\t",ApiClient.BASE_URL);
     }
 
+    private void set_language(){
+        Configuration configuration = context.getResources().getConfiguration();
+        Locale locale = new Locale(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.language),new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.country));
+        configuration.setLocale(locale);
+        context.getResources().updateConfiguration(configuration,context.getResources().getDisplayMetrics());
+    }
+
     private void move(){
         set_BASEURL();
+        set_language();
         new Tool(context).move(SignInActivity.class,true,false);
     }
 
     @Override
     public void alertOkey() {
-
+        onStart();
     }
 
     @Override

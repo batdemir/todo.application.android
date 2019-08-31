@@ -5,8 +5,11 @@ import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.batdemir.android.todolist.application.android.API.Services.UserService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.UserModel;
@@ -17,12 +20,16 @@ import com.batdemir.android.todolist.application.android.Tools.ButtonTools.OnTou
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.CharCountValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.ConfirmPasswordValidWatcher;
 import com.batdemir.android.todolist.application.android.Tools.EditTextTools.EmailValidWatcher;
+import com.batdemir.android.todolist.application.android.Tools.Tool;
+import com.batdemir.android.todolist.application.android.Tools.ToolSharedPreferences;
 import com.batdemir.android.todolist.application.android.Tools.ToolTimeExpressions;
 import com.batdemir.android.todolist.application.android.UI.Activities.Base.BaseActivity;
 import com.batdemir.android.todolist.application.android.UI.Activities.FirstSection.SignUpActivity;
+import com.batdemir.android.todolist.application.android.UI.Activities.FirstSection.SplashActivity;
 import com.batdemir.android.todolist.application.android.databinding.ActivitySettingsBinding;
 
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 
 import retrofit2.Response;
@@ -52,12 +59,18 @@ public class SettingsActivity extends BaseActivity implements UserService.UserSe
         binding.editTextUserName.setText(GlobalVariable.userModel.getUserName());
         binding.editTextUserPassword.setText(GlobalVariable.userModel.getUserPassword());
         binding.editTextEmail.setText(GlobalVariable.userModel.getEmail());
+
+        if(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.language).equals("en")){
+            binding.spinnerLanguage.setSelection(0);
+        }else {
+            binding.spinnerLanguage.setSelection(1);
+        }
     }
 
     @Override
     public void setListeners() {
-        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextFirstName));
-        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextSurName));
+        binding.editTextFirstName.addTextChangedListener(new CharCountValidWatcher(3,binding.editTextFirstName));
+        binding.editTextSurName.addTextChangedListener(new CharCountValidWatcher(3,binding.editTextSurName));
         binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserName));
         binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserPassword));
         binding.editTextConfirmUserPassword.addTextChangedListener(new ConfirmPasswordValidWatcher(binding.editTextUserPassword,binding.editTextConfirmUserPassword));
@@ -78,6 +91,28 @@ public class SettingsActivity extends BaseActivity implements UserService.UserSe
             @Override
             public void onClick(View v) {
                 new UserService<>(context).Delete(GlobalVariable.userModel);
+            }
+        });
+
+        binding.spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(binding.spinnerLanguage.getSelectedItem().toString().equals("English") || binding.spinnerLanguage.getSelectedItem().toString().equals("İngilizce")){
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.language,"en");
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.country,"US");
+                }else {
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.language,"tr");
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.language,"TR");
+                }
+                Configuration configuration = context.getResources().getConfiguration();
+                Locale locale = new Locale(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.language),new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.country));
+                configuration.setLocale(locale);
+                context.getResources().updateConfiguration(configuration,context.getResources().getDisplayMetrics());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
