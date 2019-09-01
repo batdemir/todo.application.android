@@ -27,15 +27,15 @@ public class ConfirmPasswordValidWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if(parentEditText.getText().toString().isEmpty()){
+        if (parentEditText.getText().toString().isEmpty()) {
             return;
         }
         try {
-            if(editText.getText().toString().isEmpty()){
+            if (editText.getText().toString().isEmpty()) {
                 //TODO
-            }else if(editText.getText().toString().equals(parentEditText.getText().toString())){
+            } else if (editText.getText().toString().equals(parentEditText.getText().toString())) {
                 editText.setError(null);
-            }else {
+            } else {
                 editText.setError("Input could not match.");
             }
         } catch (Exception e) {

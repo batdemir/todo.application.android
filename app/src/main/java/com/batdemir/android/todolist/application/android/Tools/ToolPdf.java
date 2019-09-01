@@ -41,7 +41,7 @@ public class ToolPdf {
     }
 
     public void createPdf(CardView cardView, RecyclerView recyclerView) {
-        File folder = new File(new Tool(context).getPath(),"TodoPdf");
+        File folder = new File(new Tool(context).getPath(), "TodoPdf");
 
         if (!folder.exists()) {
             folder.mkdir();
@@ -61,7 +61,7 @@ public class ToolPdf {
             fileOutputStream.flush();
             fileOutputStream.close();
         } catch (Exception e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
         savePdf(bitmap, path);
     }
@@ -95,39 +95,39 @@ public class ToolPdf {
         File createdFile = new File(path);
         try {
             document.writeTo(new FileOutputStream(createdFile));
-            Toast.makeText(context, context.getString(R.string.pdf_created),Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.pdf_created), Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         document.close();
 
-        if(sendMail){
+        if (sendMail) {
             sendMailPdf(createdFile);
-        }else {
+        } else {
             openPdf(createdFile);
         }
     }
 
-    private void openPdf(File createdFile){
+    private void openPdf(File createdFile) {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
         Intent target = new Intent(Intent.ACTION_VIEW);
-        target.setDataAndType(Uri.fromFile(createdFile),"application/pdf");
+        target.setDataAndType(Uri.fromFile(createdFile), "application/pdf");
         target.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         Intent intent = Intent.createChooser(target, context.getString(R.string.open_file));
         try {
             activity.startActivity(intent);
         } catch (Exception e) {
-            Log.e(TAG,e.getMessage());
-            Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Log.e(TAG, e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void sendMailPdf(File createdFile){
+    private void sendMailPdf(File createdFile) {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
@@ -139,7 +139,7 @@ public class ToolPdf {
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
         emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        emailIntent.setSelector( emailSelectorIntent );
+        emailIntent.setSelector(emailSelectorIntent);
 
         Uri attachment = Uri.fromFile(createdFile);
         emailIntent.putExtra(Intent.EXTRA_STREAM, attachment);
@@ -148,8 +148,8 @@ public class ToolPdf {
         try {
             activity.startActivity(intent);
         } catch (Exception e) {
-            Log.e(TAG,e.getMessage());
-            Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Log.e(TAG, e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

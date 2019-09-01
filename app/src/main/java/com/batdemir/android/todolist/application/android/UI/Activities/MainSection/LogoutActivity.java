@@ -29,16 +29,16 @@ public class LogoutActivity extends BaseActivity {
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(true,getString(R.string.menu));
+        init_toolbar(true, getString(R.string.menu));
         context = this;
-        binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_logout);
+        binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_logout);
     }
 
     @Override
     public void loadData() {
-        new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userName,"");
-        new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userPassword,"");
-        new Tool(context).move(SplashActivity.class,true,false);
+        new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userName, "");
+        new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userPassword, "");
+        new Tool(context).move(SplashActivity.class, true, false);
     }
 
     @Override

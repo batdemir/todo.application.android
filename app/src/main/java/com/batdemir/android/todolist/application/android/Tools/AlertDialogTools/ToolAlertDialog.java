@@ -29,11 +29,11 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions {
     private String message;
     private Boolean showCancelButton;
 
-    public static ToolAlertDialog newInstance(String message, boolean isCancelable, boolean showCancelButton){
+    public static ToolAlertDialog newInstance(String message, boolean isCancelable, boolean showCancelButton) {
         ToolAlertDialog toolAlertDialog = new ToolAlertDialog();
         Bundle bundle = new Bundle();
-        bundle.putString(key_message,message);
-        bundle.putBoolean(key_showCancelButton,showCancelButton);
+        bundle.putString(key_message, message);
+        bundle.putBoolean(key_showCancelButton, showCancelButton);
         toolAlertDialog.setArguments(bundle);
         toolAlertDialog.setCancelable(isCancelable);
         return toolAlertDialog;
@@ -42,7 +42,7 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.alert_dialog,null,false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.alert_dialog, null, false);
         getObjectReferences();
         loadData();
         setListeners();
@@ -92,8 +92,9 @@ public class ToolAlertDialog extends DialogFragment implements BaseActions {
         });
     }
 
-    public interface AlertClickListener{
+    public interface AlertClickListener {
         void alertOkey();
+
         void alertCancel();
     }
 }

@@ -20,7 +20,7 @@ public class ApiClient {
                 .setDateFormat(GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT.toString())
                 .create();
 
-        if(retrofit == null) {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
@@ -30,13 +30,13 @@ public class ApiClient {
         return retrofit;
     }
 
-    private static OkHttpClient getHttpClient(){
+    private static OkHttpClient getHttpClient() {
         OkHttpClient okHttpClient = new OkHttpClient();
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
         builder.connectTimeout(30, TimeUnit.SECONDS);
-        builder.readTimeout(30,TimeUnit.SECONDS);
+        builder.readTimeout(30, TimeUnit.SECONDS);
 
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(interceptor);

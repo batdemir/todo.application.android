@@ -5,25 +5,43 @@
     <item
         android:id="@+id/menuItemOrder"
         android:icon="@drawable/ic_order_mini"
-        app:showAsAction="always"
-        android:title="Order" />
+        android:title="@string/order"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/menuItemNoFilter"
+                android:title="@string/no_filter"/>
+
+            <item
+                android:id="@+id/menuItemShowOnlyCompleted"
+                android:title="@string/show_only_completed"/>
+
+            <item
+                android:id="@+id/menuItemShowOnlyExperid"
+                android:title="@string/show_only_expired"/>
+
+        </menu>
+
+    </item>
 
 
     <item
         android:id="@+id/menuItemExport"
         android:icon="@drawable/ic_export_mini"
-        app:showAsAction="always"
-        android:title="@string/export" >
+        android:title="@string/export"
+        app:showAsAction="always">
 
         <menu>
 
             <item
                 android:id="@+id/sendViaEmail"
-                android:title="@string/send_via_email"/>
+                android:title="@string/send_via_email" />
 
             <item
                 android:id="@+id/saveLocale"
-                android:title="@string/save_locale"/>
+                android:title="@string/save_locale" />
 
         </menu>
 

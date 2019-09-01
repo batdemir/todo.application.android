@@ -26,15 +26,15 @@ public class EmailValidWatcher implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
         try {
-            if(editText.getText().toString().isEmpty()){
+            if (editText.getText().toString().isEmpty()) {
                 //TODO
-            }else if(new ToolEditText().isEmailValid(editText.getText().toString())){
+            } else if (new ToolEditText().isEmailValid(editText.getText().toString())) {
                 editText.setError(null);
-            }else {
+            } else {
                 editText.setError("Input could not be match e-mail format.");
             }
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 }

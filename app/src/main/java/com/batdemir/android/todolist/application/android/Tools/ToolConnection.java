@@ -14,40 +14,44 @@ import java.util.List;
 public class ToolConnection {
     /**
      * Get the network info
+     *
      * @param context
      * @return
      */
-    public static NetworkInfo getNetworkInfo(Context context){
+    public static NetworkInfo getNetworkInfo(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();
     }
 
     /**
      * Check if there is any connectivity
+     *
      * @param context
      * @return
      */
-    public static boolean isConnected(Context context){
+    public static boolean isConnected(Context context) {
         NetworkInfo info = getNetworkInfo(context);
         return (info != null && info.isConnected());
     }
 
     /**
      * Check if there is any connectivity to a Wifi network
+     *
      * @param context
      * @return
      */
-    public static boolean isConnectedWifi(Context context){
+    public static boolean isConnectedWifi(Context context) {
         NetworkInfo info = getNetworkInfo(context);
         return (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_WIFI);
     }
 
     /**
      * Check if there is any connectivity to a mobile network
+     *
      * @param context
      * @return
      */
-    public static boolean isConnectedMobile(Context context){
+    public static boolean isConnectedMobile(Context context) {
         // NetworkInfo info = Connectivity.getNetworkInfo(context);
         // return (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_MOBILE);
         boolean haveConnected = false;
@@ -66,25 +70,27 @@ public class ToolConnection {
 
     /**
      * Check if there is fast connectivity
+     *
      * @param context
      * @return
      */
-    public static boolean isConnectedFast(Context context){
+    public static boolean isConnectedFast(Context context) {
         NetworkInfo info = getNetworkInfo(context);
-        return (info != null && info.isConnected() && isConnectionFast(info.getType(),info.getSubtype()));
+        return (info != null && info.isConnected() && isConnectionFast(info.getType(), info.getSubtype()));
     }
 
     /**
      * Check if the connection is fast
+     *
      * @param type
      * @param subType
      * @return
      */
-    public static boolean isConnectionFast(int type, int subType){
-        if(type==ConnectivityManager.TYPE_WIFI){
+    public static boolean isConnectionFast(int type, int subType) {
+        if (type == ConnectivityManager.TYPE_WIFI) {
             return false;
-        }else if(type==ConnectivityManager.TYPE_MOBILE){
-            switch(subType){
+        } else if (type == ConnectivityManager.TYPE_MOBILE) {
+            switch (subType) {
                 case TelephonyManager.NETWORK_TYPE_1xRTT:
                     return false; // ~ 50-100 kbps
                 case TelephonyManager.NETWORK_TYPE_CDMA:
@@ -124,15 +130,16 @@ public class ToolConnection {
                 default:
                     return false;
             }
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * Returns MAC address of the given interface name.
+     *
      * @param interfaceName eth0, wlan0 or NULL=use first interface
-     * @return  mac address or empty string
+     * @return mac address or empty string
      */
     public static String getMACAddress(String interfaceName) {
         try {
@@ -142,13 +149,14 @@ public class ToolConnection {
                     if (!intf.getName().equalsIgnoreCase(interfaceName)) continue;
                 }
                 byte[] mac = intf.getHardwareAddress();
-                if (mac==null) return "";
+                if (mac == null) return "";
                 StringBuilder buf = new StringBuilder();
-                for (byte aMac : mac) buf.append(String.format("%02X:",aMac));
-                if (buf.length()>0) buf.deleteCharAt(buf.length()-1);
+                for (byte aMac : mac) buf.append(String.format("%02X:", aMac));
+                if (buf.length() > 0) buf.deleteCharAt(buf.length() - 1);
                 return buf.toString();
             }
-        } catch (Exception ignored) { } // for now eat exceptions
+        } catch (Exception ignored) {
+        } // for now eat exceptions
         return "";
         /*try {
             // this is so Linux hack
@@ -160,8 +168,9 @@ public class ToolConnection {
 
     /**
      * Get IP address from first non-localhost interface
-     * @param useIPv4   true=return ipv4, false=return ipv6
-     * @return  address or empty string
+     *
+     * @param useIPv4 true=return ipv4, false=return ipv6
+     * @return address or empty string
      */
     public static String getIPAddress(boolean useIPv4) {
         try {
@@ -172,7 +181,7 @@ public class ToolConnection {
                     if (!addr.isLoopbackAddress()) {
                         String sAddr = addr.getHostAddress();
                         //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
-                        boolean isIPv4 = sAddr.indexOf(':')<0;
+                        boolean isIPv4 = sAddr.indexOf(':') < 0;
 
                         if (useIPv4) {
                             if (isIPv4)
@@ -180,13 +189,14 @@ public class ToolConnection {
                         } else {
                             if (!isIPv4) {
                                 int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                                return delim<0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
+                                return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
                             }
                         }
                     }
                 }
             }
-        } catch (Exception ignored) { } // for now eat exceptions
+        } catch (Exception ignored) {
+        } // for now eat exceptions
         return "";
     }
 }

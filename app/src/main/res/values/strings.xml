@@ -59,6 +59,13 @@
     <string name="was_completed_from_the_list">was completed from the list.</string>
     <string name="events">Events</string>
     <string name="todo_lists">To-Do Lists</string>
+    <string name="please_check_your_internet_connection">Please Check Your Internet Connection.</string>
+    <string name="could_not_contact_the_service_please_try_again">Could not contact the service. Please Try Again.</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="order">Order</string>
+    <string name="no_filter">No Filter</string>
+    <string name="show_only_completed">Show Only Completed</string>
+    <string name="show_only_expired">Show Only Expired</string>
 
 
     <string-array name="status_list">

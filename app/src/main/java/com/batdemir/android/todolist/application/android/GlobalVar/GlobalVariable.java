@@ -6,7 +6,7 @@ public abstract class GlobalVariable {
 
     public static UserModel userModel;
 
-    public enum DateFormat{
+    public enum DateFormat {
         CALENDER_DATE_FORMAT("EEE MMM dd hh:mm:ss 'GMT'Z yyyy"),
         DEFAULT_DATE_FORMAT("yyyy-MM-dd'T'HH:mm:ss"),
         NORMAL_DATE_FORMAT("yyyy-MM-dd HH:mm:ss"),
@@ -27,7 +27,7 @@ public abstract class GlobalVariable {
         }
     }
 
-    public enum DecimalFormat{
+    public enum DecimalFormat {
         DEFAULT_DECIMAL_FORMAT("#,###.##");
         String str;
 

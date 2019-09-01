@@ -33,15 +33,15 @@ public class CharCountValidWatcher implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
         try {
-            if(editText.getText().toString().isEmpty()){
+            if (editText.getText().toString().isEmpty()) {
                 //TODO
-            }else if(editText.getText().toString().length()>=count){
+            } else if (editText.getText().toString().length() >= count) {
                 editText.setError(null);
-            }else {
-                editText.setError("Input could not be lower than "+String.valueOf(count)+" character.");
+            } else {
+                editText.setError("Input could not be lower than " + String.valueOf(count) + " character.");
             }
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 }

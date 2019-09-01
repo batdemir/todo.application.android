@@ -30,7 +30,7 @@ public class AdapterRecyclerViewTasks extends RecyclerView.Adapter {
         this.models = models;
     }
 
-    public class TasksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class TasksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TaskModel itemModel;
 
         public TasksViewHolder(@NonNull RecyclerViewItemTasksBinding binding) {
@@ -38,7 +38,7 @@ public class AdapterRecyclerViewTasks extends RecyclerView.Adapter {
             binding.getRoot().setOnClickListener(this);
         }
 
-        public void setData(TaskModel itemModel){
+        public void setData(TaskModel itemModel) {
             this.itemModel = itemModel;
 
             binding.txtEditItemName.setText(itemModel.getName());
@@ -59,7 +59,7 @@ public class AdapterRecyclerViewTasks extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.recycler_view_item_tasks,parent,false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.recycler_view_item_tasks, parent, false);
         return new TasksViewHolder(binding);
     }
 
@@ -74,11 +74,11 @@ public class AdapterRecyclerViewTasks extends RecyclerView.Adapter {
         return models.size();
     }
 
-    public ArrayList<TaskModel> getModels(){
+    public ArrayList<TaskModel> getModels() {
         return models;
     }
 
-    public interface TasksItemListener{
+    public interface TasksItemListener {
         void onItemClick(TaskModel taskModel);
     }
 }

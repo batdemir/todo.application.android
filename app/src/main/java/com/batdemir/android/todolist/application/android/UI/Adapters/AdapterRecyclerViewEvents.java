@@ -29,7 +29,7 @@ public class AdapterRecyclerViewEvents extends RecyclerView.Adapter {
         this.models = models;
     }
 
-    public class EventsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class EventsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public EventsItemModel itemModel;
 
         public EventsViewHolder(@NonNull RecyclerViewItemEventsBinding binding) {
@@ -37,7 +37,7 @@ public class AdapterRecyclerViewEvents extends RecyclerView.Adapter {
             binding.getRoot().setOnClickListener(this);
         }
 
-        public void setData(EventsItemModel itemModel){
+        public void setData(EventsItemModel itemModel) {
             this.itemModel = itemModel;
 
             binding.imgEditIcon.setImageDrawable(itemModel.getIcon());
@@ -55,7 +55,7 @@ public class AdapterRecyclerViewEvents extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.recycler_view_item_events,parent,false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.recycler_view_item_events, parent, false);
         return new EventsViewHolder(binding);
     }
 
@@ -70,7 +70,7 @@ public class AdapterRecyclerViewEvents extends RecyclerView.Adapter {
         return models.size();
     }
 
-    public interface EventsItemListener{
+    public interface EventsItemListener {
         void onItemClick(EventsItemModel eventsItemModel);
     }
 }

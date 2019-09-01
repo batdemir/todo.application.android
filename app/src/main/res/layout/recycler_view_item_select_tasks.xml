@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -14,18 +13,18 @@
             android:id="@+id/linearInner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <CheckBox
                 android:id="@+id/checkBoxTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:padding="4dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_bold"
-                android:padding="4dp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 

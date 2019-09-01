@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rootRecyclerViewItemTodoList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/linearInner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
+
+                    <TextView
+                        android:id="@+id/txtEditTodoList"
+                        style="@style/style_recycler_view_item_todo_task_child_text_view"/>
+
+                    <TextView
+                        android:id="@+id/txtEditCreatedDate"
+                        style="@style/style_recycler_view_item_todo_task_child_text_view" />
+
+                    <TextView
+                        android:id="@+id/txtEditTask"
+                        style="@style/style_recycler_view_item_todo_task_child_text_view" />
+
+                    <TextView
+                        android:id="@+id/txtEditPriority"
+                        style="@style/style_recycler_view_item_todo_task_child_text_view"/>
+
+                    <TextView
+                        android:id="@+id/txtEditDeadLine"
+                        style="@style/style_recycler_view_item_todo_task_child_text_view" />
+
+                    <TextView
+                        android:id="@+id/txtEditStatus"
+                        style="@style/style_recycler_view_item_todo_task_child_text_view"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

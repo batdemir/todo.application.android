@@ -6,8 +6,8 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.telephony.gsm.GsmCellLocation;
 
+import com.batdemir.android.todolist.application.android.API.Services.ConnectService;
 import com.batdemir.android.todolist.application.android.API.Services.UserService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.UserModel;
 import com.batdemir.android.todolist.application.android.GlobalVar.GlobalVariable;
@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity implements
         BaseActions,
         ToolAlertDialog.AlertClickListener,
-        UserService.UserServiceListener {
+        ConnectService.ConnectServiceListener {
 
     private Context context;
     private ActivitySignInBinding binding;
@@ -42,14 +42,14 @@ public class SignInActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         ToolAlertDialog
-                .newInstance(getString(R.string.exit_application),true,true)
-                .show(getSupportFragmentManager(),SignInActivity.class.getSimpleName());
+                .newInstance(getString(R.string.exit_application), true, true)
+                .show(getSupportFragmentManager(), SignInActivity.class.getSimpleName());
     }
 
     @Override
     public void getObjectReferences() {
         context = this;
-        binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_sign_in);
+        binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_sign_in);
         new Tool(context).anim(binding.linearProps);
     }
 
@@ -57,60 +57,60 @@ public class SignInActivity extends AppCompatActivity implements
     public void loadData() {
         String userName = new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userName);
         String userPassword = new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userPassword);
-        if(userName.isEmpty() && userPassword.isEmpty()){
+        if (userName.isEmpty() && userPassword.isEmpty()) {
             binding.editTextUserName.setText("");
             binding.editTextUserPassword.setText("");
             binding.checkBoxRememberMe.setChecked(false);
-        }else {
+        } else {
             binding.editTextUserName.setText(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userName));
             binding.editTextUserPassword.setText(new ToolSharedPreferences(context).getSharedPreferencesString(ToolSharedPreferences.Keys.userPassword));
             binding.checkBoxRememberMe.setChecked(true);
-            new UserService<>(context).Login(binding.editTextUserName.getText().toString(), binding.editTextUserPassword.getText().toString());
+            new UserService(context).Login(binding.editTextUserName.getText().toString(), binding.editTextUserPassword.getText().toString());
         }
     }
 
     @Override
     public void setListeners() {
-        binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserName));
-        binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5,binding.editTextUserPassword));
+        binding.editTextUserName.addTextChangedListener(new CharCountValidWatcher(5, binding.editTextUserName));
+        binding.editTextUserPassword.addTextChangedListener(new CharCountValidWatcher(5, binding.editTextUserPassword));
         binding.btnLogin.setOnTouchListener(new OnTouchEvent(binding.btnLogin));
         binding.btnSignUp.setOnTouchListener(new OnTouchEvent(binding.btnSignUp));
 
         binding.btnLogin.setOnClickListener(v -> {
-            if(controlInputs()){
-                if(binding.checkBoxRememberMe.isChecked()){
-                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userName,binding.editTextUserName.getText().toString());
-                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userPassword,binding.editTextUserPassword.getText().toString());
+            if (controlInputs()) {
+                if (binding.checkBoxRememberMe.isChecked()) {
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userName, binding.editTextUserName.getText().toString());
+                    new ToolSharedPreferences(context).setSharedPreferencesString(ToolSharedPreferences.Keys.userPassword, binding.editTextUserPassword.getText().toString());
                 }
-                new UserService<>(context).Login(binding.editTextUserName.getText().toString(), binding.editTextUserPassword.getText().toString());
+                new UserService(context).Login(binding.editTextUserName.getText().toString(), binding.editTextUserPassword.getText().toString());
             }
         });
-        binding.btnSignUp.setOnClickListener(v -> new Tool(context).move(SignUpActivity.class,false,false));
+        binding.btnSignUp.setOnClickListener(v -> new Tool(context).move(SignUpActivity.class, false, false));
     }
 
     //----functions----//
 
-    private boolean controlInputs(){
+    private boolean controlInputs() {
         String message = "";
-        message += binding.editTextUserName.getError()!=null || binding.editTextUserName.getText().toString().isEmpty()
-                ?getString(R.string.please_enter_correctly)+ binding.textInputUserName.getHint() + "!\n":"";
-        message += binding.editTextUserPassword.getError()!=null || binding.editTextUserPassword.getText().toString().isEmpty()
-                ?getString(R.string.please_enter_correctly)+ binding.textInputUserPassword.getHint() + "!\n":"";
+        message += binding.editTextUserName.getError() != null || binding.editTextUserName.getText().toString().isEmpty()
+                ? getString(R.string.please_enter_correctly) + binding.textInputUserName.getHint() + "!\n" : "";
+        message += binding.editTextUserPassword.getError() != null || binding.editTextUserPassword.getText().toString().isEmpty()
+                ? getString(R.string.please_enter_correctly) + binding.textInputUserPassword.getHint() + "!\n" : "";
 
-        if(message.isEmpty())
+        if (message.isEmpty())
             return true;
         else {
-            ToolAlertDialog.newInstance(message,true,false).show(getSupportFragmentManager(),SignInActivity.class.getSimpleName());
+            ToolAlertDialog.newInstance(message, true, false).show(getSupportFragmentManager(), SignInActivity.class.getSimpleName());
             return false;
         }
     }
 
     @Override
     public void onSuccess(UserService.OperationType operationType, Response response) {
-        switch (operationType){
-            case Login:
+        switch (operationType) {
+            case UserLogin:
                 GlobalVariable.userModel = (UserModel) response.body();
-                new Tool(context).move(MenuActivity.class,true,false);
+                new Tool(context).move(MenuActivity.class, true, false);
                 break;
         }
     }

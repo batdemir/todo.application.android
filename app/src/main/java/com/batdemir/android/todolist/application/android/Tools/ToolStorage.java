@@ -125,7 +125,7 @@ public class ToolStorage {
                         String emulatedRootPath = applicationSpecificAbsolutePath.substring(
                                 0, applicationSpecificAbsolutePath.indexOf("Android/data")
                         );
-                        if(!emulatedRootPath.contains("emulated")){
+                        if (!emulatedRootPath.contains("emulated")) {
                             finalAvailableDirectoriesSet.add(emulatedRootPath);
                         }
                     }

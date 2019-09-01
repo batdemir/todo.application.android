@@ -4,10 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class TodoListModel implements Serializable {
-
-    @SerializedName("Id")
-    private String Id;
+public class TodoListModel extends BaseModel implements Serializable {
 
     @SerializedName("TodoName")
     private String TodoName;
@@ -21,31 +18,17 @@ public class TodoListModel implements Serializable {
     @SerializedName("StatusName")
     private String StatusName;
 
-    @SerializedName("Active")
-    private Boolean Active;
-
-    @SerializedName("CreatedDate")
-    private String CreatedDate;
-
     public TodoListModel() {
     }
 
     public TodoListModel(String id, String todoName, String userName, String taskName, String statusName, Boolean active, String createdDate) {
-        Id = id;
+        setId(id);
         TodoName = todoName;
         UserName = userName;
         TaskName = taskName;
         StatusName = statusName;
-        Active = active;
-        CreatedDate = createdDate;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
+        setActive(active);
+        setCreatedDate(createdDate);
     }
 
     public String getTodoName() {
@@ -78,22 +61,6 @@ public class TodoListModel implements Serializable {
 
     public void setStatusName(String statusName) {
         StatusName = statusName;
-    }
-
-    public Boolean getActive() {
-        return Active;
-    }
-
-    public void setActive(Boolean active) {
-        Active = active;
-    }
-
-    public String getCreatedDate() {
-        return CreatedDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        CreatedDate = createdDate;
     }
 
     @Override

@@ -36,8 +36,8 @@ public class PhoneValidWatcher implements TextWatcher {
             } else {
                 editText.setError("Input could not be match phone format.");
             }
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 }

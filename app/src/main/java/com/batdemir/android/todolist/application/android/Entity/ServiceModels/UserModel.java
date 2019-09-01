@@ -4,10 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class UserModel implements Serializable {
-
-    @SerializedName("Id")
-    private String Id;
+public class UserModel extends BaseModel implements Serializable {
 
     @SerializedName("UserName")
     private String UserName;
@@ -24,32 +21,18 @@ public class UserModel implements Serializable {
     @SerializedName("Email")
     private String Email;
 
-    @SerializedName("Active")
-    private Boolean Active;
-
-    @SerializedName("CreatedDate")
-    private String CreatedDate;
-
     public UserModel() {
     }
 
     public UserModel(String id, String userName, String userPassword, String firstName, String surName, String email, Boolean active, String createdDate) {
-        Id = id;
+        setId(id);
         UserName = userName;
         UserPassword = userPassword;
         FirstName = firstName;
         SurName = surName;
         Email = email;
-        Active = active;
-        CreatedDate = createdDate;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
+        setActive(active);
+        setCreatedDate(createdDate);
     }
 
     public String getUserName() {
@@ -90,22 +73,6 @@ public class UserModel implements Serializable {
 
     public void setEmail(String email) {
         Email = email;
-    }
-
-    public Boolean getActive() {
-        return Active;
-    }
-
-    public void setActive(Boolean active) {
-        Active = active;
-    }
-
-    public String getCreatedDate() {
-        return CreatedDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        CreatedDate = createdDate;
     }
 
     @Override

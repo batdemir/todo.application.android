@@ -16,25 +16,25 @@ import retrofit2.http.Query;
 
 public interface ITaskService {
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @GET("Task/GetTasksByUser")
     Call<ArrayList<TaskModel>> GetTasksByUser(
             @Query("userName") String userName
     );
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("Task/Insert")
     Call<TaskModel> Insert(
             @Body TaskModel taskModel
     );
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PUT("Task/Update")
     Call<TaskModel> Update(
             @Body TaskModel taskModel
     );
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("Task/Delete")
     Call<TaskModel> Delete(
             @Body TaskModel taskModel

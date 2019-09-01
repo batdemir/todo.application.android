@@ -39,15 +39,15 @@ public class MenuActivity extends BaseActivity implements AdapterRecyclerViewEve
 
     @Override
     public void getObjectReferences() {
-        init_toolbar(false,getString(R.string.menu));
+        init_toolbar(false, getString(R.string.menu));
         context = this;
-        binding = DataBindingUtil.setContentView((Activity) context,R.layout.activity_menu);
+        binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_menu);
     }
 
     @Override
     public void loadData() {
-        AdapterRecyclerViewEvents adapterRecyclerViewEvents = new AdapterRecyclerViewEvents(context,getModels());
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false);
+        AdapterRecyclerViewEvents adapterRecyclerViewEvents = new AdapterRecyclerViewEvents(context, getModels());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
         binding.recyclerViewEvents.setAdapter(adapterRecyclerViewEvents);
         binding.recyclerViewEvents.setLayoutManager(gridLayoutManager);
         binding.recyclerViewEvents.setItemViewCacheSize(getModels().size());
@@ -61,16 +61,16 @@ public class MenuActivity extends BaseActivity implements AdapterRecyclerViewEve
 
     @Override
     public void onItemClick(EventsItemModel eventsItemModel) {
-        new Tool(context).move(eventsItemModel.getTo(),true,true);
+        new Tool(context).move(eventsItemModel.getTo(), true, true);
     }
 
-    private ArrayList<EventsItemModel> getModels(){
+    private ArrayList<EventsItemModel> getModels() {
         ArrayList<EventsItemModel> models = new ArrayList<>();
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.task_defination), TaskDefinationActivity.class,context.getDrawable(R.drawable.ic_task_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.todolist_defination), TodoListDefinationActivity.class,context.getDrawable(R.drawable.ic_todo_list_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.todolists), TodoListActivity.class,context.getDrawable(R.drawable.ic_todolist_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.settings), SettingsActivity.class,context.getDrawable(R.drawable.ic_settings_gears_mini)));
-        models.add(new EventsItemModel(UUID.randomUUID().toString(),getString(R.string.logout), LogoutActivity.class,context.getDrawable(R.drawable.ic_exit_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.task_defination), TaskDefinationActivity.class, context.getDrawable(R.drawable.ic_task_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.todolist_defination), TodoListDefinationActivity.class, context.getDrawable(R.drawable.ic_todo_list_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.todolists), TodoListActivityV2.class, context.getDrawable(R.drawable.ic_todolist_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.settings), SettingsActivity.class, context.getDrawable(R.drawable.ic_settings_gears_mini)));
+        models.add(new EventsItemModel(UUID.randomUUID().toString(), getString(R.string.logout), LogoutActivity.class, context.getDrawable(R.drawable.ic_exit_mini)));
         return models;
     }
 }

@@ -16,19 +16,19 @@ import retrofit2.http.Path;
 
 public interface ITodoListsService {
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("TodoList/Insert")
     Call<TodoListModel> Insert(
             @Body TodoListModel todoListModel
     );
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PUT("TodoList/Update")
     Call<TodoListModel> Update(
             @Body TodoListModel todoListModel
     );
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("TodoList/Delete")
     Call<TodoListModel> Delete(
             @Body TodoListModel todoListModel

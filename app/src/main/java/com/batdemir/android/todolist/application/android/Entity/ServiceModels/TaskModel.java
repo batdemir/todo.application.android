@@ -6,10 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class TaskModel implements Serializable {
-
-    @SerializedName("Id")
-    private String Id;
+public class TaskModel extends BaseModel implements Serializable {
 
     @SerializedName("Name")
     private String Name;
@@ -26,32 +23,18 @@ public class TaskModel implements Serializable {
     @SerializedName("UserName")
     private String UserName;
 
-    @SerializedName("Active")
-    private Boolean Active;
-
-    @SerializedName("CreatedDate")
-    private String CreatedDate;
-
     public TaskModel() {
     }
 
     public TaskModel(@NonNull String id, String name, String description, String deadLine, String priorityName, String userName, Boolean active, String createdDate) {
-        Id = id;
+        setId(id);
         Name = name;
         Description = description;
         DeadLine = deadLine;
         PriorityName = priorityName;
         UserName = userName;
-        Active = active;
-        CreatedDate = createdDate;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
+        setActive(active);
+        setCreatedDate(createdDate);
     }
 
     public String getName() {
@@ -92,22 +75,6 @@ public class TaskModel implements Serializable {
 
     public void setUserName(String userName) {
         UserName = userName;
-    }
-
-    public Boolean getActive() {
-        return Active;
-    }
-
-    public void setActive(Boolean active) {
-        Active = active;
-    }
-
-    public String getCreatedDate() {
-        return CreatedDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        CreatedDate = createdDate;
     }
 
     @Override

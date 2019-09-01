@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        tools:context=".UI.Activities.DetailSection.TodoListDefinationActivity"
         android:id="@+id/rootTodoListDefination"
+        style="@style/style_other_root"
         android:orientation="vertical"
-        style="@style/style_other_root">
+        tools:context=".UI.Activities.DetailSection.TodoListDefinationActivity">
 
         <LinearLayout
             android:id="@+id/linearProps"
@@ -21,8 +20,8 @@
 
                 <LinearLayout
                     android:id="@+id/linearInner"
-                    android:orientation="horizontal"
-                    style="@style/style_other_inner">
+                    style="@style/style_other_inner"
+                    android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputName"
@@ -33,9 +32,9 @@
 
                         <EditText
                             android:id="@+id/editTextName"
-                            android:inputType="text"
+                            style="@style/style_other_edittext"
                             android:imeOptions="actionDone"
-                            style="@style/style_other_edittext"/>
+                            android:inputType="text" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,8 +42,8 @@
                         android:id="@+id/floatingActionButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_add_mini"
-                        android:backgroundTint="@color/secondaryColor"/>
+                        android:backgroundTint="@color/secondaryColor"
+                        android:src="@drawable/ic_add_mini" />
 
                 </LinearLayout>
 
@@ -56,28 +55,47 @@
             android:id="@+id/linearSelectableTasks"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_margin="8dp"
-            android:padding="8dp"
+            android:layout_weight="1"
+            android:background="@color/white"
             android:orientation="vertical"
-            android:background="@color/white">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtSelectableTasks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@string/selectable_tasks"
-                android:textSize="18sp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/roboto_bold"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:text="@string/selectable_tasks"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSelectableTasks"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 tools:listitem="@layout/recycler_view_item_select_tasks" />
+
+            <TextView
+                android:id="@+id/txtTodoList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_bold"
+                android:padding="8dp"
+                android:text="@string/todolists"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewTodoList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:listitem="@layout/recycler_view_item_todolist"/>
 
         </LinearLayout>
 

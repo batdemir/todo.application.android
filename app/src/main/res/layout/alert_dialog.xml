@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView
         android:id="@+id/rootAlertDialog"
-        android:layout_height="wrap_content"
-        style="@style/style_other_root">
+        style="@style/style_other_root"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/linearProps"
-            android:layout_gravity="top"
-            style="@style/style_other_props">
+            style="@style/style_other_props"
+            android:layout_gravity="top">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -19,22 +18,22 @@
 
                 <LinearLayout
                     android:id="@+id/linearInner"
-                    android:minWidth="320dp"
-                    style="@style/style_other_inner">
+                    style="@style/style_other_inner"
+                    android:minWidth="320dp">
 
                     <ImageView
-                        android:src="@android:drawable/ic_menu_info_details"
+                        style="@style/style_other_image_view"
                         android:padding="16dp"
-                        style="@style/style_other_image_view"/>
+                        android:src="@android:drawable/ic_menu_info_details" />
 
                     <TextView
                         android:id="@+id/txtEditMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="8dp"
                         android:text=""
-                        android:textColor="@color/black"
                         android:textAlignment="center"
-                        android:padding="8dp" />
+                        android:textColor="@color/black" />
 
                     <LinearLayout
                         android:id="@+id/linearButtons"
@@ -44,13 +43,13 @@
 
                         <Button
                             android:id="@+id/btnCancel"
-                            android:text="@string/cancel"
-                            style="@style/style_other_button"/>
+                            style="@style/style_other_button"
+                            android:text="@string/cancel" />
 
                         <Button
                             android:id="@+id/btnOkey"
-                            android:text="@string/okey"
-                            style="@style/style_other_button"/>
+                            style="@style/style_other_button"
+                            android:text="@string/okey" />
 
                     </LinearLayout>
 

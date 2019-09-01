@@ -60,6 +60,9 @@
     <string name="okey">Tamam</string>
     <string name="already_have_an_account_sign_in">Zaten bir hesabın var mı? Giriş Yap.</string>
     <string name="confirm_password">Tekrar Şifre</string>
+    <string name="please_check_your_internet_connection">Lütfen, İnternet Bağlantınızı Kontrol Ediniz.</string>
+    <string name="could_not_contact_the_service_please_try_again">Servis İle Bağlantı Kurulama, Lütfen Tekrar Deneyiniz.</string>
+    <string name="please_wait">Lütfen Bekleyiniz...</string>
 
     <string-array name="status_list">
         <item>Oluşturuldu</item>

@@ -1,6 +1,6 @@
 package com.batdemir.android.todolist.application.android.API.IServices;
 
-import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoModel;
+import com.batdemir.android.todolist.application.android.Entity.ServiceModels.CustomTodoTasksModel;
 
 import java.util.ArrayList;
 
@@ -11,9 +11,9 @@ import retrofit2.http.Query;
 
 public interface ICustomService {
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("Custom/GetTodoTasks")
-    Call<ArrayList<CustomTodoModel>> GetTodoTasks(
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @GET("Custom/GetTodoTasksV2")
+    Call<ArrayList<CustomTodoTasksModel>> GetTodoTasksV2(
             @Query("userName") String userName
     );
 }

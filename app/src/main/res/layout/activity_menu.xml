@@ -4,20 +4,13 @@
 
     <LinearLayout
         android:id="@+id/rootMenu"
-        android:orientation="vertical"
-        style="@style/style_other_root">
+        style="@style/style_other_root"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtEvents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/events"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:background="@color/primaryLightColor"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"/>
+            style="@style/style_events_header_text_view"
+            android:text="@string/events" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

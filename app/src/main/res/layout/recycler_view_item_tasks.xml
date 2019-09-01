@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -15,19 +14,19 @@
             android:id="@+id/linearInner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtEditItemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                    android:padding="8dp"
-                android:fontFamily="@font/roboto_bold"/>
+                android:textSize="18sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/contraintDeadCalender"
@@ -38,36 +37,36 @@
                     android:id="@+id/imgDeadLineCalender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_alarm_mini"
-                    android:padding="8dp"
                     android:contentDescription="@string/todo"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_alarm_mini"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/linearDeadLineCalaneder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="@+id/imgDeadLineCalender"
                     app:layout_constraintBottom_toBottomOf="@id/imgDeadLineCalender"
-                    app:layout_constraintStart_toEndOf="@id/imgDeadLineCalender">
+                    app:layout_constraintStart_toEndOf="@id/imgDeadLineCalender"
+                    app:layout_constraintTop_toTopOf="@+id/imgDeadLineCalender">
 
                     <TextView
                         android:id="@+id/txtDeadLineCalender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/deadline_calender"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/txtEditDeadLineCalender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:fontFamily="@font/roboto"/>
+                        android:fontFamily="@font/roboto"
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -82,36 +81,36 @@
                     android:id="@+id/imgDeadLineClock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_alarm_clock_mini"
-                    android:padding="8dp"
                     android:contentDescription="@string/todo"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_alarm_clock_mini"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/linearDeadLineClock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="@+id/imgDeadLineClock"
                     app:layout_constraintBottom_toBottomOf="@id/imgDeadLineClock"
-                    app:layout_constraintStart_toEndOf="@id/imgDeadLineClock">
+                    app:layout_constraintStart_toEndOf="@id/imgDeadLineClock"
+                    app:layout_constraintTop_toTopOf="@+id/imgDeadLineClock">
 
                     <TextView
                         android:id="@+id/txtDeadLineClock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/deadline_clock"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/txtEditDeadLineClock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:fontFamily="@font/roboto"/>
+                        android:fontFamily="@font/roboto"
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -126,29 +125,29 @@
                     android:id="@+id/imgPriorty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_flag_mini"
-                    android:padding="8dp"
                     android:contentDescription="@string/todo"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_flag_mini"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/linearPriorty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="@+id/imgPriorty"
                     app:layout_constraintBottom_toBottomOf="@id/imgPriorty"
-                    app:layout_constraintStart_toEndOf="@id/imgPriorty">
+                    app:layout_constraintStart_toEndOf="@id/imgPriorty"
+                    app:layout_constraintTop_toTopOf="@+id/imgPriorty">
 
                     <TextView
                         android:id="@+id/txtPriorty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/priority"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_bold"
                         app:layout_constraintStart_toEndOf="@+id/imgPriorty"
                         app:layout_constraintTop_toTopOf="@id/imgPriorty" />
 
@@ -156,8 +155,8 @@
                         android:id="@+id/txtEditPriort"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
                         android:fontFamily="@font/roboto"
+                        android:text=""
                         app:layout_constraintBottom_toBottomOf="@id/imgPriorty"
                         app:layout_constraintStart_toEndOf="@+id/imgPriorty" />
 

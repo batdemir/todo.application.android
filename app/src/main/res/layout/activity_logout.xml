@@ -4,20 +4,13 @@
 
     <LinearLayout
         android:id="@+id/rootLogout"
-        android:orientation="vertical"
-        style="@style/style_other_root">
+        style="@style/style_other_root"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/logout"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:background="@color/primaryLightColor"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"/>
+            style="@style/style_events_header_text_view"
+            android:text="@string/logout" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

@@ -31,7 +31,7 @@ public class AdapterRecyclerViewSelectTasks extends RecyclerView.Adapter {
         this.models = models;
     }
 
-    public class TasksViewHolder extends RecyclerView.ViewHolder implements CheckBox.OnCheckedChangeListener{
+    public class TasksViewHolder extends RecyclerView.ViewHolder implements CheckBox.OnCheckedChangeListener {
         public TaskModel itemModel;
 
         public TasksViewHolder(@NonNull RecyclerViewItemSelectTasksBinding binding) {
@@ -39,10 +39,10 @@ public class AdapterRecyclerViewSelectTasks extends RecyclerView.Adapter {
             binding.checkBoxTask.setOnCheckedChangeListener(this);
         }
 
-        public void setData(TaskModel itemModel){
+        public void setData(TaskModel itemModel) {
             this.itemModel = itemModel;
 
-            String str = "\t" + itemModel.getName() +"\n\t" +context.getString(R.string.dead_line) + new ToolTimeExpressions().setDateFormat(itemModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT,GlobalVariable.DateFormat.SHOW_FULL_FORMAT);
+            String str = "\t" + itemModel.getName() + "\n\t" + context.getString(R.string.dead_line) + new ToolTimeExpressions().setDateFormat(itemModel.getDeadLine(), GlobalVariable.DateFormat.DEFAULT_DATE_FORMAT, GlobalVariable.DateFormat.SHOW_FULL_FORMAT);
 
             binding.checkBoxTask.setText(str);
         }
@@ -51,7 +51,7 @@ public class AdapterRecyclerViewSelectTasks extends RecyclerView.Adapter {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             Activity activity = (Activity) context;
             TasksItemListener eventsItemListener = (TasksItemListener) activity;
-            eventsItemListener.onItemCheckedChanged(isChecked,itemModel);
+            eventsItemListener.onItemCheckedChanged(isChecked, itemModel);
         }
 
     }
@@ -59,7 +59,7 @@ public class AdapterRecyclerViewSelectTasks extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.recycler_view_item_select_tasks,parent,false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.recycler_view_item_select_tasks, parent, false);
         return new TasksViewHolder(binding);
     }
 
@@ -74,11 +74,11 @@ public class AdapterRecyclerViewSelectTasks extends RecyclerView.Adapter {
         return models.size();
     }
 
-    public ArrayList<TaskModel> getModels(){
+    public ArrayList<TaskModel> getModels() {
         return models;
     }
 
-    public interface TasksItemListener{
-        void onItemCheckedChanged(boolean isChecked,TaskModel taskModel);
+    public interface TasksItemListener {
+        void onItemCheckedChanged(boolean isChecked, TaskModel taskModel);
     }
 }

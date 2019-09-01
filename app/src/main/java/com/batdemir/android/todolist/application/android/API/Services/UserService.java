@@ -1,150 +1,34 @@
 package com.batdemir.android.todolist.application.android.API.Services;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.widget.Toast;
-
-import androidx.fragment.app.FragmentActivity;
 
 import com.batdemir.android.todolist.application.android.API.ApiClient;
 import com.batdemir.android.todolist.application.android.API.IServices.IUserService;
 import com.batdemir.android.todolist.application.android.Entity.ServiceModels.UserModel;
-import com.batdemir.android.todolist.application.android.Tools.AlertDialogTools.ToolAlertDialog;
-import com.batdemir.android.todolist.application.android.Tools.Tool;
-import com.batdemir.android.todolist.application.android.Tools.ToolConnection;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Response;
-
-public class UserService<T> implements
-        ToolAlertDialog.AlertClickListener {
+public class UserService extends ConnectService {
 
     private Context context;
-    private boolean connectionAvailable = false;
-
-    public enum OperationType{
-        Exception,
-        Login,
-        Insert,
-        Update,
-        Delete;
-
-        OperationType() {
-        }
-    }
+    private IUserService iUserService;
 
     public UserService(Context context) {
         this.context = context;
-        connectionAvailable = ToolConnection.isConnected(context);
-        if(!connectionAvailable)
-            ToolAlertDialog
-                    .newInstance("Please Check Your Internet Connection.",false,false)
-                    .show(((FragmentActivity) context).getSupportFragmentManager(),UserService.class.getSimpleName());
+        this.iUserService = ApiClient.getClient().create(IUserService.class);
     }
 
-    public void Login(String userName, String userPassword){
-        if(!connectionAvailable)
-            return;
-        IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.Login).execute(iUserService.Login(userName,userPassword));
+    public void Login(String userName, String userPassword) {
+        connect(context, iUserService.Login(userName, userPassword), OperationType.UserLogin);
     }
 
-    public void Insert(UserModel userModel){
-        if(!connectionAvailable)
-            return;
-        IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.Insert).execute(iUserService.Insert(userModel));
+    public void Insert(UserModel userModel) {
+        connect(context, iUserService.Insert(userModel), OperationType.UserInsert);
     }
 
-    public void Update(UserModel userModel){
-        if(!connectionAvailable)
-            return;
-        IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.Update).execute(iUserService.Update(userModel));
+    public void Update(UserModel userModel) {
+        connect(context, iUserService.Update(userModel), OperationType.UserUpdate);
     }
 
-    public void Delete(UserModel userModel){
-        if(!connectionAvailable)
-            return;
-        IUserService iUserService = ApiClient.getClient().create(IUserService.class);
-        new ConnectService(context,OperationType.Delete).execute(iUserService.Delete(userModel));
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class ConnectService extends AsyncTask<Call,Void, Response<T>>{
-        private ProgressDialog progressDialog;
-        private Context context;
-        private OperationType operationType;
-
-        public ConnectService(Context context, OperationType operationType) {
-            this.context = context;
-            this.operationType = operationType;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            if (progressDialog == null) {
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Please wait.");
-                progressDialog.show();
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-            }
-        }
-
-        @Override
-        protected Response<T> doInBackground(Call... calls) {
-            try{
-                return calls[0].execute();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Response<T> response) {
-            if(progressDialog.isShowing()){
-                progressDialog.dismiss();
-            }
-            Activity activity  = (Activity) context;
-            UserServiceListener userServiceListener = (UserServiceListener) activity;
-            try{
-                if(response.isSuccessful()){
-                    userServiceListener.onSuccess(operationType, response);
-                }else {
-                    ToolAlertDialog
-                            .newInstance(response.errorBody().string(),false,false)
-                            .show(((FragmentActivity) context).getSupportFragmentManager(),UserService.class.getSimpleName());
-                    userServiceListener.onFailure(operationType);
-                }
-            }catch (Exception e){
-                ToolAlertDialog
-                        .newInstance("Could not contact the service.\nPlease Try Again.",false,false)
-                        .show(((FragmentActivity) context).getSupportFragmentManager(),UserService.class.getSimpleName());
-                userServiceListener.onFailure(OperationType.Exception);
-            }
-        }
-    }
-
-    public interface UserServiceListener<T>{
-        void onSuccess(OperationType operationType,Response<T> response);
-        void onFailure(OperationType operationType);
-    }
-
-    @Override
-    public void alertOkey() {
-
-    }
-
-    @Override
-    public void alertCancel() {
-
+    public void Delete(UserModel userModel) {
+        connect(context, iUserService.Delete(userModel), OperationType.UserDelete);
     }
 }
